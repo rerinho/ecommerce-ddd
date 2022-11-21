@@ -1,4 +1,4 @@
-import * as cpfValidator from "cpf";
+import { cpf as cpfValidator } from 'cpf-cnpj-validator'; 
 
 // TODO: check possibility to use class-validator lib here
 
