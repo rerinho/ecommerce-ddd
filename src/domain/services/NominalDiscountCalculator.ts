@@ -1,0 +1,8 @@
+import { Discount } from "../entities/value-objects/Discount";
+import { DiscountCalculator } from "./DiscountCalculator";
+
+export class NominalDiscountCalculator implements DiscountCalculator {
+  calculate(_: number, discount: Discount): number {
+    return discount.props.value;
+  }
+}

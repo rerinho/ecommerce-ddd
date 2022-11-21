@@ -1,0 +1,13 @@
+import { Discount, DiscountType } from "../entities/value-objects/Discount";
+import { NominalDiscountCalculator } from "./NominalDiscountCalculator";
+import { PercentageDiscountCalculator } from "./PercentageDiscountCalculator copy";
+
+export class DiscountCalculatorFactory {
+  static Create(discount: Discount) {
+    if (discount.props.type === DiscountType.Nominal) {
+      return new NominalDiscountCalculator();
+    }
+
+    return new PercentageDiscountCalculator();
+  }
+}

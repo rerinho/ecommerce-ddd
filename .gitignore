@@ -1,0 +1,10 @@
+# compiled output
+/dist
+/node_modules
+
+# Tests
+/coverage
+
+# IDEs and editors
+.settings/
+.vscode/*
