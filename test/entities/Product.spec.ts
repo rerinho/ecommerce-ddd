@@ -2,13 +2,12 @@ import Product from "../../src/domain/entities/Product";
 
 describe("Product", () => {
   describe("Should not allow creating a product with", () => {
-    test("a non positive price", () => {
-      expect(() => new Product("valid description", -1)).toThrow(Error);
-    });
-
-    test("a non positive price", () => {
-      expect(() => new Product("valid description", 0)).toThrow(Error);
-    });
+    test.each([{ price: -1 }, { price: 0 }])(
+      "a non positive price: %f",
+      ({ price }: { price: number }) => {
+        expect(() => new Product("valid description", price)).toThrow(Error);
+      }
+    );
 
     describe("invalid description", () => {
       test("with length less than 1 characters", () => {
