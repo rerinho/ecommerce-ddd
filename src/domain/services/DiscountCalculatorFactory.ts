@@ -1,6 +1,6 @@
 import { Discount, DiscountType } from "../entities/value-objects/Discount";
 import { NominalDiscountCalculator } from "./NominalDiscountCalculator";
-import { PercentageDiscountCalculator } from "./PercentageDiscountCalculator copy";
+import { PercentageDiscountCalculator } from "./PercentageDiscountCalculator";
 
 export class DiscountCalculatorFactory {
   static Create(discount: Discount) {
