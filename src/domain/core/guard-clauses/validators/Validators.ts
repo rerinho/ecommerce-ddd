@@ -1,3 +1,5 @@
+import * as cpfValidator from "cpf";
+
 // TODO: check possibility to use class-validator lib here
 
 export function isNull(value: any): boolean {
@@ -22,4 +24,8 @@ export function isPositive(value: unknown) {
 
 export function isBiggerThan(value: unknown, min: number) {
   return typeof value === "number" && value > min;
+}
+
+export function isValidCpf(cpf: unknown) {
+  return typeof cpf === "string" && cpfValidator.isValid(cpf);
 }
