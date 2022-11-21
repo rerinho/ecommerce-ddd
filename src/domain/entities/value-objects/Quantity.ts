@@ -1,5 +1,5 @@
-import { Guard } from "../../../core/guard-clauses/GuardClauseBuilder";
-import { ValueObject } from "../../../core/ValueObject";
+import { Guard } from "../../core/guard-clauses/GuardClauseBuilder";
+import { ValueObject } from "../../core/ValueObject";
 
 interface QuantityProps {
   value: number;
