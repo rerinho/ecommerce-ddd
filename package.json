@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "test": "yarn jest",
+    "test:watch": "yarn jest --watchAll",
+    "test:coverage": "yarn jest --collectCoverage"
+  },
   "dependencies": {
     "@types/jest": "^29.2.3",
     "cpf-cnpj-validator": "^1.0.3",
