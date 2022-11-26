@@ -1,5 +1,5 @@
-import { Guard } from "../../core/guard-clauses/GuardClauseBuilder";
-import { ValueObject } from "../../core/ValueObject";
+import { Guard } from "../../../shared/guard-clauses/GuardClauseBuilder";
+import { ValueObject } from "../../../shared/domain/ValueObject";
 
 interface QuantityProps {
   value: number;
@@ -8,6 +8,7 @@ interface QuantityProps {
 export class Quantity extends ValueObject<QuantityProps> {
   static Create(quantity: number) {
     Guard.Create({ value: quantity, argumentName: "quantity" })
+      .isInteger()
       .isPositive()
       .validate();
 
