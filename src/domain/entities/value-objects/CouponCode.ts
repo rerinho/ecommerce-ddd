@@ -1,5 +1,5 @@
-import { Guard } from "../../core/guard-clauses/GuardClauseBuilder";
-import { ValueObject } from "../../core/ValueObject";
+import { Guard } from "../../../shared/guard-clauses/GuardClauseBuilder";
+import { ValueObject } from "../../../shared/domain/ValueObject";
 
 interface CouponCodeProps {
   value: string;
