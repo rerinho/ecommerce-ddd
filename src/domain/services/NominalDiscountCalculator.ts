@@ -3,6 +3,6 @@ import { DiscountCalculator } from "./DiscountCalculator";
 
 export class NominalDiscountCalculator implements DiscountCalculator {
   calculate(_: number, discount: Discount): number {
-    return discount.props.value;
+    return discount.value.value;
   }
 }

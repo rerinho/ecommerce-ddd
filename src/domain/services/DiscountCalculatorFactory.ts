@@ -4,7 +4,7 @@ import { PercentageDiscountCalculator } from "./PercentageDiscountCalculator";
 
 export class DiscountCalculatorFactory {
   static Create(discount: Discount) {
-    if (discount.props.type === DiscountType.Nominal) {
+    if (discount.value.type === DiscountType.Nominal) {
       return new NominalDiscountCalculator();
     }
 
