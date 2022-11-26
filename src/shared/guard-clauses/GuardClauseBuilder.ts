@@ -1,7 +1,5 @@
 import {
   MaxLength,
-  NotNull,
-  NotUndefined,
   IsInteger,
   IsPositive,
   IsValidCpf,
@@ -26,25 +24,6 @@ export class Guard {
     return new Guard(value, argumentName);
   }
 
-  notNull() {
-    this.addGuardClause(
-      new NotNull({
-        value: this.value,
-        argumentName: this.argumentName,
-      })
-    );
-    return this;
-  }
-
-  notUndefined() {
-    this.addGuardClause(
-      new NotUndefined({
-        value: this.value,
-        argumentName: this.argumentName,
-      })
-    );
-    return this;
-  }
 
   maxLength(length: number) {
     this.addGuardClause(
