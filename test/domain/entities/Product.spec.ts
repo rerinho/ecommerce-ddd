@@ -1,7 +1,7 @@
-import Product from "../../src/domain/entities/Product";
+import Product from "../../../src/domain/entities/Product";
 
 describe("Product", () => {
-  describe("Should not allow creating a product with", () => {
+  describe("should not allow creating a product with", () => {
     test.each([{ price: -1 }, { price: 0 }])(
       "a non positive price: %f",
       ({ price }: { price: number }) => {
@@ -22,7 +22,7 @@ describe("Product", () => {
     });
   });
 
-  describe("Should create a product", () => {
+  describe("should create a product", () => {
     test("the price is positive", () => {
       expect(new Product("valid description", 20).price).toBe(20);
     });

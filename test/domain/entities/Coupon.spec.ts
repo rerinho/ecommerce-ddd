@@ -1,5 +1,5 @@
-import { Coupon } from "../../src/domain/entities/Coupon";
-import { DiscountType } from "../../src/domain/entities/value-objects/Discount";
+import { Coupon } from "../../../src/domain/entities/Coupon";
+import { DiscountType } from "../../../src/domain/entities/value-objects/Discount";
 
 describe("Coupon", () => {
   describe("should not allow creating coupon when", () => {
