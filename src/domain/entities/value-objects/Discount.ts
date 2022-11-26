@@ -1,9 +1,9 @@
-import { Guard } from "../../core/guard-clauses/GuardClauseBuilder";
-import { ValueObject } from "../../core/ValueObject";
+import { Guard } from "../../../shared/guard-clauses/GuardClauseBuilder";
+import { ValueObject } from "../../../shared/domain/ValueObject";
 
 export enum DiscountType {
   Nominal = "NOMINAL",
-  Percentage = "Percentage",
+  Percentage = "PERCENTAGE",
 }
 
 interface DiscountProps {
@@ -11,8 +11,13 @@ interface DiscountProps {
   type: DiscountType;
 }
 
+export interface CreateDiscountOptions {
+  value: number;
+  type: DiscountType;
+}
+
 export class Discount extends ValueObject<DiscountProps> {
-  static Create(value: number, type: DiscountType) {
+  static Create({ type, value }: CreateDiscountOptions) {
     Guard.Create({ value: value, argumentName: "value" })
       .isPositive()
       .validate();
