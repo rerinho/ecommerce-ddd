@@ -1,11 +1,11 @@
-import { ObjectUtilsAdapter } from "./adapters/ObjectUtilsAdapter";
+import { ObjectTool } from "../tools/ObjectTool";
 
 interface ValueObjectProps {
   [index: string]: any;
 }
 
 export abstract class ValueObject<T extends ValueObjectProps> {
-  public readonly props: T;
+  protected readonly props: T;
 
   protected constructor(props: T) {
     this.props = Object.freeze(props);
@@ -20,6 +20,6 @@ export abstract class ValueObject<T extends ValueObjectProps> {
       return false;
     }
 
-    return ObjectUtilsAdapter.isEqual(this.props, valueObject.props);
+    return ObjectTool.isEqual(this.props, valueObject.props);
   }
 }

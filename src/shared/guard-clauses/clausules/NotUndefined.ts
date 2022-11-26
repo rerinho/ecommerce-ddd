@@ -1,5 +1,4 @@
-import { isUndefined } from "./validators/Validators";
-import { GuardClause } from "./GuardClause";
+import { GuardClause } from "./abstract/GuardClause";
 
 export class NotUndefined extends GuardClause {
   getGuardExceptionMessage(): string {
@@ -7,6 +6,6 @@ export class NotUndefined extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return !isUndefined(this.value);
+    return this.value !== undefined;
   }
 }

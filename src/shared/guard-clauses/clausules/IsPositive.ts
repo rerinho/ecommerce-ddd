@@ -1,5 +1,5 @@
-import { isPositive } from "./validators/Validators";
-import { GuardClause } from "./GuardClause";
+import { NumberTool } from "../../tools/NumberTool";
+import { GuardClause } from "./abstract/GuardClause";
 
 export class IsPositive extends GuardClause {
   getGuardExceptionMessage(): string {
@@ -7,6 +7,6 @@ export class IsPositive extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return isPositive(this.value);
+    return NumberTool.isPositive(this.value);
   }
 }

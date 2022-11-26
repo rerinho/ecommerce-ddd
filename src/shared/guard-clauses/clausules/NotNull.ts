@@ -1,5 +1,4 @@
-import { isNull } from "./validators/Validators";
-import { GuardClause } from "./GuardClause";
+import { GuardClause } from "./abstract/GuardClause";
 
 export class NotNull extends GuardClause {
   getGuardExceptionMessage(): string {
@@ -7,6 +6,6 @@ export class NotNull extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return !isNull(this.value);
+    return this.value !== null;
   }
 }

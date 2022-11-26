@@ -1,4 +1,4 @@
-export type CreateGuardClauseInput = {
+export type CreateGuardClauseOptions = {
   value: unknown;
   argumentName: string;
 };
@@ -7,7 +7,7 @@ export abstract class GuardClause {
   protected value: unknown;
   protected argumentName: string;
 
-  constructor({ value, argumentName }: CreateGuardClauseInput) {
+  constructor({ value, argumentName }: CreateGuardClauseOptions) {
     this.value = value;
     this.argumentName = argumentName;
   }

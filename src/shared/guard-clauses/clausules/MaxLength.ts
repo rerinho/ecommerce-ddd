@@ -1,10 +1,10 @@
-import { hasLengthSmallOrEqualTo } from "./validators/Validators";
-import { CreateGuardClauseInput, GuardClause } from "./GuardClause";
+import { StringTool } from "../../tools/StringTool";
+import { CreateGuardClauseOptions, GuardClause } from "./abstract/GuardClause";
 
 export class MaxLength extends GuardClause {
   private length: number;
 
-  constructor(input: CreateGuardClauseInput & { maxLength: number }) {
+  constructor(input: CreateGuardClauseOptions & { maxLength: number }) {
     super(input);
     this.length = input.maxLength;
   }
@@ -14,6 +14,6 @@ export class MaxLength extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return hasLengthSmallOrEqualTo(this.value, this.length);
+    return StringTool.hasLengthSmallOrEqualTo(this.value, this.length);
   }
 }

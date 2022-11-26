@@ -1,10 +1,16 @@
-import { NotNull } from "./NotNull";
-import { NotUndefined } from "./NotUndefined";
-import { CreateGuardClauseInput, GuardClause } from "./GuardClause";
-import { MaxLength } from "./MaxLength";
-import { MinLength } from "./MinLength";
-import { IsPositive } from "./IsPositive";
-import { IsValidCpf } from "./IsValidCpf";
+import {
+  MaxLength,
+  NotNull,
+  NotUndefined,
+  IsInteger,
+  IsPositive,
+  IsValidCpf,
+  MinLength,
+} from "./clausules";
+import {
+  CreateGuardClauseOptions,
+  GuardClause,
+} from "./clausules/abstract/GuardClause";
 
 export class Guard {
   private guardClauses: GuardClause[];
@@ -16,7 +22,7 @@ export class Guard {
   static Create({
     argumentName,
     value,
-  }: Pick<CreateGuardClauseInput, "value" | "argumentName">) {
+  }: Pick<CreateGuardClauseOptions, "value" | "argumentName">) {
     return new Guard(value, argumentName);
   }
 
@@ -75,6 +81,16 @@ export class Guard {
   isValidCpf() {
     this.addGuardClause(
       new IsValidCpf({
+        value: this.value,
+        argumentName: this.argumentName,
+      })
+    );
+    return this;
+  }
+
+  isInteger() {
+    this.addGuardClause(
+      new IsInteger({
         value: this.value,
         argumentName: this.argumentName,
       })
