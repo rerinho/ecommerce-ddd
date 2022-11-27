@@ -25,7 +25,11 @@ export class Discount extends ValueObject<DiscountProps> {
     return new Discount({ value, type });
   }
 
-  get value(): DiscountProps {
-    return this.props;
+  get value(): number {
+    return this.props.value;
+  }
+
+  get type(): DiscountType {
+    return this.props.type;
   }
 }
