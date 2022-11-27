@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "cpf-cnpj-validator": "^1.0.3",
+    "date-fns": "^2.29.3",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
