@@ -39,12 +39,20 @@ export class Order {
     discountValue: number;
     discountType: DiscountType;
     code: string;
+    expirationDate: Date;
   }) {
-    this.coupon = new Coupon({
+    const coupon = new Coupon({
       code: input.code,
       discountType: input.discountType,
       discountValue: input.discountValue,
+      expirationDate: input.expirationDate,
     });
+
+    if (coupon.isExpired()) {
+      throw new Error("coupon expired.");
+    } else {
+      this.coupon = coupon;
+    }
   }
 
   private calculateCouponDiscountAmount(): number {
