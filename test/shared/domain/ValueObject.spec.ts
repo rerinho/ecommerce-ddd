@@ -1,4 +1,4 @@
-import { ValueObject } from "../../src/shared/domain/ValueObject";
+import { ValueObject } from "~/shared/domain/ValueObject";
 
 class MockValueObject extends ValueObject<{ value?: string }> {
   static Create(value: string) {
@@ -60,7 +60,7 @@ describe("ValueObject", () => {
 
         expect(valueObject.equals(anotherValueObject)).toBe(false);
       });
-      
+
       test("when the object value properties have different values", () => {
         const valueObject = MockValueObject.Create("value");
         const anotherValueObject = MockValueObject.Create("anotherValue");
