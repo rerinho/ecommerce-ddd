@@ -16,10 +16,6 @@ export abstract class ValueObject<T extends ValueObjectProps> {
       return false;
     }
 
-    if (valueObject.props === undefined) {
-      return false;
-    }
-
     return ObjectTool.isEqual(this.props, valueObject.props);
   }
 }
