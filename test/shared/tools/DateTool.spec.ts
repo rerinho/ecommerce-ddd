@@ -12,8 +12,6 @@ describe("DateTools", () => {
         const inputDate = new Date(rawInputDate);
         const expectedDate = new Date(rawExpectedDate);
 
-        console.log(DateTool.addDaysTo(inputDate, daysToAdd));
-
         expect(DateTool.addDaysTo(inputDate, daysToAdd)).toStrictEqual(
           expectedDate
         );
