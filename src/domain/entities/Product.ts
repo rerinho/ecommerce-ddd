@@ -1,26 +1,31 @@
 import { Price } from "./value-objects/Price";
 import { ProductDescription } from "./value-objects/ProductDescription";
 import { Dimensions } from "./value-objects/Dimensions";
+import { Weight } from "./value-objects/Weight";
 
-interface CreateProductOptions {
+export interface CreateProductOptions {
   description: string;
   price: number;
   dimensions: Dimensions;
+  weight: number;
 }
 
 export default class Product {
-  private readonly _price: Price;
-  private readonly _description: ProductDescription;
-  private readonly _dimension: Dimensions;
+  private _price: Price;
+  private _description: ProductDescription;
+  private _dimensions: Dimensions;
+  private _weight: Weight;
 
   constructor({
     description,
-    dimensions: dimension,
+    dimensions,
     price,
+    weight,
   }: CreateProductOptions) {
     this._description = ProductDescription.Create(description);
     this._price = Price.Create(price);
-    this._dimension = dimension;
+    this._weight = Weight.Create(weight);
+    this._dimensions = dimensions;
   }
 
   get price(): number {
@@ -31,9 +36,13 @@ export default class Product {
     return this._description.value;
   }
 
+  get weight(): number {
+    return this._weight.value;
+  }
+
   get volume(): number {
     return (
-      this._dimension.height * this._dimension.width * this._dimension.length
+      this._dimensions.height * this._dimensions.width * this._dimensions.length
     );
   }
 }

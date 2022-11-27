@@ -2,38 +2,43 @@ import {
   CreateDimensionOptions,
   Dimensions,
 } from "~/domain/entities/value-objects/Dimensions";
-import Product from "../../../src/domain/entities/Product";
+import Product, {
+  CreateProductOptions,
+} from "../../../src/domain/entities/Product";
 
+// Constants
 const VALID_DIMENSIONS = Dimensions.Create({
   height: 1,
   width: 1,
   length: 1,
 });
 
+const VALID_CREATE_PRODUCT_OPTIONS: CreateProductOptions = {
+  description: "Valid description",
+  dimensions: VALID_DIMENSIONS,
+  price: 10,
+  weight: 1,
+};
+
 describe("Product", () => {
   describe("should not allow creating a product with", () => {
-    test.each([{ price: -1 }, { price: 0 }])(
-      "a non positive price: %f",
-      ({ price }: { price: number }) => {
-        expect(
-          () =>
-            new Product({
-              description: "valid description",
-              price,
-              dimensions: VALID_DIMENSIONS,
-            })
-        ).toThrow(Error);
-      }
-    );
+    test.each([-1, 0])("a non positive price: %f", (price: number) => {
+      expect(
+        () =>
+          new Product({
+            ...VALID_CREATE_PRODUCT_OPTIONS,
+            price,
+          })
+      ).toThrow(Error);
+    });
 
     describe("invalid description", () => {
       test("with length less than 1 characters", () => {
         expect(
           () =>
             new Product({
+              ...VALID_CREATE_PRODUCT_OPTIONS,
               description: "",
-              price: 10,
-              dimensions: VALID_DIMENSIONS,
             })
         ).toThrow(Error);
       });
@@ -42,9 +47,8 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
+              ...VALID_CREATE_PRODUCT_OPTIONS,
               description: "A description with more than 20 characters",
-              price: 10,
-              dimensions: VALID_DIMENSIONS,
             })
         ).toThrow(Error);
       });
@@ -55,8 +59,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              description: "Valid description",
-              price: 10,
+              ...VALID_CREATE_PRODUCT_OPTIONS,
               dimensions: Dimensions.Create({
                 height: 1,
                 length: 0,
@@ -70,8 +73,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              description: "Valid description",
-              price: 10,
+              ...VALID_CREATE_PRODUCT_OPTIONS,
               dimensions: Dimensions.Create({
                 height: 1,
                 length: 1,
@@ -85,8 +87,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              description: "Valid description",
-              price: 10,
+              ...VALID_CREATE_PRODUCT_OPTIONS,
               dimensions: Dimensions.Create({
                 height: 0,
                 length: 1,
@@ -96,15 +97,22 @@ describe("Product", () => {
         ).toThrowError(Error("height must be a positive number."));
       });
     });
+
+    describe("invalid weight", () => {
+      test.each([[0], [-1]])("%d", (weight: number) => {
+        expect(
+          () => new Product({ ...VALID_CREATE_PRODUCT_OPTIONS, weight })
+        ).toThrowError(Error("weight must be a positive number."));
+      });
+    });
   });
 
-  describe("should create a product", () => {
-    test("the price is positive", () => {
+  describe("should create a product with", () => {
+    test("a positive price", () => {
       expect(
         new Product({
-          description: "valid description",
+          ...VALID_CREATE_PRODUCT_OPTIONS,
           price: 20,
-          dimensions: VALID_DIMENSIONS,
         }).price
       ).toBe(20);
     });
@@ -113,23 +121,30 @@ describe("Product", () => {
       test("with length equal than 1 characters", () => {
         expect(
           new Product({
+            ...VALID_CREATE_PRODUCT_OPTIONS,
             description: "A",
-            price: 10,
-            dimensions: VALID_DIMENSIONS,
           }).description
         ).toBe("A");
       });
 
       test("with length equal than 20 characters", () => {
         const product = new Product({
+          ...VALID_CREATE_PRODUCT_OPTIONS,
           description: "Exactly 20 character",
-          price: 10,
-          dimensions: VALID_DIMENSIONS,
         });
 
         expect(product.description).toBe("Exactly 20 character");
         expect(product.price).toBe(10);
       });
+    });
+
+    test("a positive weight", () => {
+      expect(
+        new Product({
+          ...VALID_CREATE_PRODUCT_OPTIONS,
+          weight: 10,
+        }).weight
+      ).toBe(10);
     });
   });
 
@@ -174,8 +189,7 @@ describe("Product", () => {
         expectedValue: number
       ) => {
         const product = new Product({
-          description: "Valid description",
-          price: 10,
+          ...VALID_CREATE_PRODUCT_OPTIONS,
           dimensions: Dimensions.Create({
             height,
             length,

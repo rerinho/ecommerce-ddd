@@ -18,6 +18,7 @@ const PRODUCT = new Product({
     length: 1,
     width: 1,
   }),
+  weight: 1,
 });
 
 describe("Order", () => {
