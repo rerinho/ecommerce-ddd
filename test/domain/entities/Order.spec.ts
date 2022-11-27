@@ -1,3 +1,4 @@
+import { Dimensions } from "~/domain/entities/value-objects/Dimensions";
 import { DateTool } from "~/shared/tools/DateTool";
 import { Order } from "../../../src/domain/entities/Order";
 import Product from "../../../src/domain/entities/Product";
@@ -9,6 +10,16 @@ const INVALID_CPF = "111111111";
 const VALID_COUPON_CODE = "COUPONCODE12";
 const VALID_COUPON_EXPIRATION_DATE = DateTool.addDaysTo(new Date(), 10);
 
+const PRODUCT = new Product({
+  description: "A valid description",
+  price: 50,
+  dimensions: Dimensions.Create({
+    height: 1,
+    length: 1,
+    width: 1,
+  }),
+});
+
 describe("Order", () => {
   test("should not allow creating an order with an invalid consumer CPF", () => {
     expect(() => new Order(INVALID_CPF)).toThrow(Error);
@@ -17,9 +28,8 @@ describe("Order", () => {
   describe("addItem", () => {
     test("should add an item in the order", () => {
       const order = new Order(VALID_CPF);
-      const product = setupProduct();
 
-      order.addItem(product, 2);
+      order.addItem(PRODUCT, 2);
 
       expect(order.orderItems).toHaveLength(1);
       expect(order.orderItems[0].quantity).toBe(2);
@@ -41,8 +51,7 @@ describe("Order", () => {
     });
 
     test("nominal discount ", () => {
-      const product = setupProduct();
-      const order = new Order(VALID_CPF).addItem(product, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
       order.applyCoupon({
         code: VALID_COUPON_CODE,
         discountType: DiscountType.Nominal,
@@ -54,8 +63,7 @@ describe("Order", () => {
     });
 
     test("percentage discount ", () => {
-      const product = setupProduct();
-      const order = new Order(VALID_CPF).addItem(product, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
       order.applyCoupon({
         code: VALID_COUPON_CODE,
         discountType: DiscountType.Percentage,
@@ -69,15 +77,13 @@ describe("Order", () => {
 
   describe("should create an order with 3 valid products", () => {
     test("without coupon application", () => {
-      const product = setupProduct();
-      const order = new Order(VALID_CPF).addItem(product, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
 
       expect(order.total).toBe(150);
     });
 
     test("subTotal should return the price without discounts", () => {
-      const product = setupProduct();
-      const order = new Order(VALID_CPF).addItem(product, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
 
       order.applyCoupon({
         code: VALID_COUPON_CODE,
@@ -90,8 +96,3 @@ describe("Order", () => {
     });
   });
 });
-
-// Setups
-function setupProduct() {
-  return new Product("A valid description", 50);
-}
