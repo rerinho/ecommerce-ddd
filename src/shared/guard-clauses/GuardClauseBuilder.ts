@@ -9,6 +9,7 @@ import {
   CreateGuardClauseOptions,
   GuardClause,
 } from "./clausules/abstract/GuardClause";
+import { IsValidUuid } from "./clausules/IsUuid";
 
 export class Guard {
   private guardClauses: GuardClause[];
@@ -23,7 +24,6 @@ export class Guard {
   }: Pick<CreateGuardClauseOptions, "value" | "argumentName">) {
     return new Guard(value, argumentName);
   }
-
 
   maxLength(length: number) {
     this.addGuardClause(
@@ -70,6 +70,16 @@ export class Guard {
   isInteger() {
     this.addGuardClause(
       new IsInteger({
+        value: this.value,
+        argumentName: this.argumentName,
+      })
+    );
+    return this;
+  }
+
+  isValidUuid() {
+    this.addGuardClause(
+      new IsValidUuid({
         value: this.value,
         argumentName: this.argumentName,
       })
