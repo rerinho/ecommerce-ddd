@@ -1,4 +1,4 @@
-import { Dimensions } from "~/domain/entities/value-objects/Dimensions";
+import { Dimension } from "~/domain/entities/value-objects/Dimension";
 
 const VALID_CREATE_DIMENSIONS_OPTIONS = {
   height: 1,
@@ -12,7 +12,7 @@ describe("Dimensions", () => {
     (key: string) => {
       test.each([0, -0.01])("%d", (value: number) => {
         expect(() =>
-          Dimensions.Create({
+          Dimension.Create({
             ...VALID_CREATE_DIMENSIONS_OPTIONS,
             [key]: value,
           })
@@ -22,7 +22,7 @@ describe("Dimensions", () => {
   );
 
   test("should create a Dimensions instance when a valid dimensions values are entered", () => {
-    const dimension = Dimensions.Create(VALID_CREATE_DIMENSIONS_OPTIONS);
+    const dimension = Dimension.Create(VALID_CREATE_DIMENSIONS_OPTIONS);
 
     expect(dimension).toBeTruthy();
     expect(dimension.height).toBe(VALID_CREATE_DIMENSIONS_OPTIONS.height);

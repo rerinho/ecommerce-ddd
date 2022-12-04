@@ -1,18 +1,10 @@
-import { Dimensions } from "~/domain/entities/value-objects/Dimensions";
+import { generateProduct } from "@test/utils/entity-generator/product.generator";
+import { Price } from "~/domain/entities/value-objects/Price";
+
 import { OrderItem } from "../../../src/domain/entities/OrderItem";
-import Product from "../../../src/domain/entities/Product";
 
 // Constants
-const PRODUCT = new Product({
-  description: "A valid description",
-  price: 50,
-  dimensions: Dimensions.Create({
-    height: 1,
-    length: 1,
-    width: 1,
-  }),
-  weight: 1,
-});
+const PRODUCT = generateProduct();
 
 describe("OrderItem", () => {
   test("should throw error when a the entered quantity is invalid", () => {

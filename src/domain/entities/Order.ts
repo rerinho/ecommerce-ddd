@@ -25,6 +25,18 @@ export class Order {
     return this.subTotal - this.calculateCouponDiscountAmount();
   }
 
+  private calculateCouponDiscountAmount(): number {
+    if (!this.coupon) {
+      return 0;
+    }
+
+    const discountCalculator = DiscountCalculatorFactory.Create(
+      this.coupon.discount
+    );
+
+    return discountCalculator.calculate(this.subTotal, this.coupon.discount);
+  }
+
   get orderItems() {
     return this._orderItems;
   }
@@ -53,17 +65,5 @@ export class Order {
     } else {
       this.coupon = coupon;
     }
-  }
-
-  private calculateCouponDiscountAmount(): number {
-    if (!this.coupon) {
-      return 0;
-    }
-
-    const discountCalculator = DiscountCalculatorFactory.Create(
-      this.coupon.discount
-    );
-
-    return discountCalculator.calculate(this.subTotal, this.coupon.discount);
   }
 }

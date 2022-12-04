@@ -1,7 +1,7 @@
-import { Dimensions } from "~/domain/entities/value-objects/Dimensions";
+import { generateProduct } from "@test/utils/entity-generator/product.generator";
+import { Dimension } from "~/domain/entities/value-objects/Dimension";
 import { DateTool } from "~/shared/tools/DateTool";
 import { Order } from "../../../src/domain/entities/Order";
-import Product from "../../../src/domain/entities/Product";
 import { DiscountType } from "../../../src/domain/entities/value-objects/Discount";
 
 // Constants
@@ -10,16 +10,7 @@ const INVALID_CPF = "111111111";
 const VALID_COUPON_CODE = "COUPONCODE12";
 const VALID_COUPON_EXPIRATION_DATE = DateTool.addDaysTo(new Date(), 10);
 
-const PRODUCT = new Product({
-  description: "A valid description",
-  price: 50,
-  dimensions: Dimensions.Create({
-    height: 1,
-    length: 1,
-    width: 1,
-  }),
-  weight: 1,
-});
+const PRODUCT = generateProduct();
 
 describe("Order", () => {
   test("should not allow creating an order with an invalid consumer CPF", () => {

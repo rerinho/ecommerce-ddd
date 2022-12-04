@@ -1,24 +1,11 @@
+import { VALID_CREATE_PRODUCT_OPTIONS } from "@test/utils/entity-generator/product.generator";
+import Product from "~/domain/entities/Product";
 import {
   CreateDimensionOptions,
-  Dimensions,
-} from "~/domain/entities/value-objects/Dimensions";
-import Product, {
-  CreateProductOptions,
-} from "../../../src/domain/entities/Product";
-
-// Constants
-const VALID_DIMENSIONS = Dimensions.Create({
-  height: 1,
-  width: 1,
-  length: 1,
-});
-
-const VALID_CREATE_PRODUCT_OPTIONS: CreateProductOptions = {
-  description: "Valid description",
-  dimensions: VALID_DIMENSIONS,
-  price: 10,
-  weight: 1,
-};
+  Dimension,
+} from "~/domain/entities/value-objects/Dimension";
+import { Price } from "~/domain/entities/value-objects/Price";
+import { Weight } from "~/domain/entities/value-objects/Weight";
 
 describe("Product", () => {
   describe("should not allow creating a product with", () => {
@@ -27,7 +14,7 @@ describe("Product", () => {
         () =>
           new Product({
             ...VALID_CREATE_PRODUCT_OPTIONS,
-            price,
+            price: Price.Create(price),
           })
       ).toThrow(Error);
     });
@@ -60,7 +47,7 @@ describe("Product", () => {
           () =>
             new Product({
               ...VALID_CREATE_PRODUCT_OPTIONS,
-              dimensions: Dimensions.Create({
+              dimension: Dimension.Create({
                 height: 1,
                 length: 0,
                 width: 1,
@@ -74,7 +61,7 @@ describe("Product", () => {
           () =>
             new Product({
               ...VALID_CREATE_PRODUCT_OPTIONS,
-              dimensions: Dimensions.Create({
+              dimension: Dimension.Create({
                 height: 1,
                 length: 1,
                 width: 0,
@@ -88,7 +75,7 @@ describe("Product", () => {
           () =>
             new Product({
               ...VALID_CREATE_PRODUCT_OPTIONS,
-              dimensions: Dimensions.Create({
+              dimension: Dimension.Create({
                 height: 0,
                 length: 1,
                 width: 1,
@@ -101,7 +88,11 @@ describe("Product", () => {
     describe("invalid weight", () => {
       test.each([[0], [-1]])("%d", (weight: number) => {
         expect(
-          () => new Product({ ...VALID_CREATE_PRODUCT_OPTIONS, weight })
+          () =>
+            new Product({
+              ...VALID_CREATE_PRODUCT_OPTIONS,
+              weight: Weight.Create(weight),
+            })
         ).toThrowError(Error("weight must be a positive number."));
       });
     });
@@ -112,7 +103,7 @@ describe("Product", () => {
       expect(
         new Product({
           ...VALID_CREATE_PRODUCT_OPTIONS,
-          price: 20,
+          price: Price.Create(20),
         }).price
       ).toBe(20);
     });
@@ -134,7 +125,6 @@ describe("Product", () => {
         });
 
         expect(product.description).toBe("Exactly 20 character");
-        expect(product.price).toBe(10);
       });
     });
 
@@ -142,7 +132,7 @@ describe("Product", () => {
       expect(
         new Product({
           ...VALID_CREATE_PRODUCT_OPTIONS,
-          weight: 10,
+          weight: Weight.Create(10),
         }).weight
       ).toBe(10);
     });
@@ -190,7 +180,7 @@ describe("Product", () => {
       ) => {
         const product = new Product({
           ...VALID_CREATE_PRODUCT_OPTIONS,
-          dimensions: Dimensions.Create({
+          dimension: Dimension.Create({
             height,
             length,
             width,

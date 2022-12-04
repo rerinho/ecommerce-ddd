@@ -13,7 +13,7 @@ export interface CreateDimensionOptions {
   length: number;
 }
 
-export class Dimensions extends ValueObject<DimensionProps> {
+export class Dimension extends ValueObject<DimensionProps> {
   static Create({ height, length, width }: CreateDimensionOptions) {
     Guard.Create({ argumentName: "height", value: height })
       .isPositive()
@@ -25,7 +25,7 @@ export class Dimensions extends ValueObject<DimensionProps> {
       .isPositive()
       .validate();
 
-    return new Dimensions({
+    return new Dimension({
       height,
       length,
       width,
