@@ -16,13 +16,13 @@ export default class Product {
   private _id: ProductId;
   private _price: Price;
   private _description: ProductDescription;
-  private _dimensions: Dimension;
+  private _dimension: Dimension;
   private _weight: Weight;
 
   constructor({
     id,
     description,
-    dimension: dimensions,
+    dimension,
     price,
     weight,
   }: CreateProductOptions) {
@@ -30,7 +30,7 @@ export default class Product {
     this._description = ProductDescription.Create(description);
     this._price = price;
     this._weight = weight;
-    this._dimensions = dimensions;
+    this._dimension = dimension;
   }
 
   get id(): ProductId {
@@ -41,17 +41,19 @@ export default class Product {
     return this._price;
   }
 
+  get dimension(): Dimension {
+    return this._dimension;
+  }
+
   get description(): string {
     return this._description.value;
   }
 
-  get weight(): number {
-    return this._weight.value;
+  get weight(): Weight {
+    return this._weight;
   }
 
   get volume(): number {
-    return (
-      this._dimensions.height * this._dimensions.width * this._dimensions.length
-    );
+    return this._dimension.volume;
   }
 }

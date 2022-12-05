@@ -32,6 +32,10 @@ export class Dimension extends ValueObject<DimensionProps> {
     });
   }
 
+  get volume(): number {
+    return this.props.height * this.props.width * this.props.length;
+  }
+
   get height(): number {
     return this.props.height;
   }

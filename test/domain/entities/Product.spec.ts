@@ -133,7 +133,7 @@ describe("Product", () => {
         new Product({
           ...VALID_CREATE_PRODUCT_OPTIONS,
           weight: Weight.Create(10),
-        }).weight
+        }).weight.value
       ).toBe(10);
     });
   });
