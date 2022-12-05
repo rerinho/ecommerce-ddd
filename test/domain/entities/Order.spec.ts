@@ -26,6 +26,16 @@ describe("Order", () => {
       expect(order.orderItems).toHaveLength(1);
       expect(order.orderItems[0].quantity).toBe(2);
     });
+
+    test("should not allow adding a duplicated item", () => {
+      const order = new Order(VALID_CPF);
+
+      order.addItem(PRODUCT, Quantity.Create(1));
+
+      expect(() => order.addItem(PRODUCT, Quantity.Create(1))).toThrow(
+        Error("Duplicated item.")
+      );
+    });
   });
 
   describe("applyCoupon", () => {

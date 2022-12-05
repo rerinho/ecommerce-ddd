@@ -1,4 +1,4 @@
-import { DiscountCalculatorFactory } from "../services/DiscountCalculatorFactory";
+import { DiscountCalculatorFactory } from "../services/discount/DiscountCalculatorFactory";
 import { Coupon } from "./Coupon";
 import { OrderItem as OrderItem } from "./OrderItem";
 import Product from "./Product";
@@ -43,6 +43,10 @@ export class Order {
   }
 
   public addItem(product: Product, quantity: Quantity) {
+    if (this.hasAlreadyAdded(product)) {
+      throw new Error("Duplicated item.");
+    }
+
     const orderItem = new OrderItem({
       price: product.price,
       productId: product.id,
@@ -50,6 +54,12 @@ export class Order {
     });
     this._orderItems.push(orderItem);
     return this;
+  }
+
+  private hasAlreadyAdded(product: Product) {
+    return this._orderItems.some(
+      (orderItem) => orderItem.productId === product.id
+    );
   }
 
   public applyCoupon(input: {
