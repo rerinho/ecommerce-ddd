@@ -6,13 +6,17 @@ import { Cpf } from "./value-objects/Cpf";
 import { DiscountType } from "./value-objects/Discount";
 import { Quantity } from "./value-objects/Quantity";
 
+interface CreateOrderOptions {
+  customerCpf: Cpf;
+}
+
 export class Order {
   private customerCpf: Cpf;
   private coupon?: Coupon;
   private _orderItems: OrderItem[] = [];
 
-  constructor(customerCpf: string) {
-    this.customerCpf = Cpf.Create(customerCpf);
+  constructor(options: CreateOrderOptions) {
+    this.customerCpf = options.customerCpf;
   }
 
   get subTotal(): number {
