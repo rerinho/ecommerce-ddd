@@ -1,4 +1,4 @@
-import { v4 as uuid, validate } from "uuid";
+import { v4 as uuid, validate, version as uuidVersion } from "uuid";
 
 export class UuidTool {
   static generate() {
@@ -6,6 +6,8 @@ export class UuidTool {
   }
 
   static isValidUuid(uuid: unknown) {
-    return typeof uuid === "string" && validate(uuid);
+    return (
+      typeof uuid === "string" && validate(uuid) && uuidVersion(uuid) === 4
+    );
   }
 }
