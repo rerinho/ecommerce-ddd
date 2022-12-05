@@ -33,12 +33,12 @@ export default class Product {
     this._dimensions = dimensions;
   }
 
-  get id(): string {
-    return this._id.value;
+  get id(): ProductId {
+    return this._id;
   }
 
-  get price(): number {
-    return this._price.value;
+  get price(): Price {
+    return this._price;
   }
 
   get description(): string {

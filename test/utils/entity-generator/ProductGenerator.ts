@@ -1,12 +1,11 @@
 import Product, { CreateProductOptions } from "~/domain/entities/Product";
-import { ProductId } from "~/domain/entities/ProductId";
 import { Dimension } from "~/domain/entities/value-objects/Dimension";
 import { Price } from "~/domain/entities/value-objects/Price";
 import { Weight } from "~/domain/entities/value-objects/Weight";
-import { UuidTool } from "~/shared/tools/UuidTool";
+import { generateProductId } from "../value-generator/ProductIdGenerator";
 
-export const VALID_CREATE_PRODUCT_OPTIONS = {
-  id: ProductId.Create(UuidTool.generate()),
+export const VALID_CREATE_PRODUCT_OPTIONS: CreateProductOptions = {
+  id: generateProductId(),
   description: "Valid description",
   dimension: Dimension.Create({
     height: 1,

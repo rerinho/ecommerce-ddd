@@ -4,6 +4,7 @@ import { OrderItem as OrderItem } from "./OrderItem";
 import Product from "./Product";
 import { Cpf } from "./value-objects/Cpf";
 import { DiscountType } from "./value-objects/Discount";
+import { Quantity } from "./value-objects/Quantity";
 
 export class Order {
   private customerCpf: Cpf;
@@ -41,8 +42,12 @@ export class Order {
     return this._orderItems;
   }
 
-  public addItem(product: Product, quantity: number) {
-    const orderItem = new OrderItem(product, quantity);
+  public addItem(product: Product, quantity: Quantity) {
+    const orderItem = new OrderItem({
+      price: product.price,
+      productId: product.id,
+      quantity,
+    });
     this._orderItems.push(orderItem);
     return this;
   }

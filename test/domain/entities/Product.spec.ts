@@ -1,4 +1,4 @@
-import { VALID_CREATE_PRODUCT_OPTIONS } from "@test/utils/entity-generator/product.generator";
+import { VALID_CREATE_PRODUCT_OPTIONS } from "@test/utils/entity-generator/ProductGenerator";
 import Product from "~/domain/entities/Product";
 import {
   CreateDimensionOptions,
@@ -104,7 +104,7 @@ describe("Product", () => {
         new Product({
           ...VALID_CREATE_PRODUCT_OPTIONS,
           price: Price.Create(20),
-        }).price
+        }).price.value
       ).toBe(20);
     });
 

@@ -1,5 +1,5 @@
-import { generateProduct } from "@test/utils/entity-generator/product.generator";
-import { Dimension } from "~/domain/entities/value-objects/Dimension";
+import { generateProduct } from "@test/utils/entity-generator/ProductGenerator";
+import { Quantity } from "~/domain/entities/value-objects/Quantity";
 import { DateTool } from "~/shared/tools/DateTool";
 import { Order } from "../../../src/domain/entities/Order";
 import { DiscountType } from "../../../src/domain/entities/value-objects/Discount";
@@ -21,7 +21,7 @@ describe("Order", () => {
     test("should add an item in the order", () => {
       const order = new Order(VALID_CPF);
 
-      order.addItem(PRODUCT, 2);
+      order.addItem(PRODUCT, Quantity.Create(2));
 
       expect(order.orderItems).toHaveLength(1);
       expect(order.orderItems[0].quantity).toBe(2);
@@ -43,7 +43,7 @@ describe("Order", () => {
     });
 
     test("nominal discount ", () => {
-      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, Quantity.Create(3));
       order.applyCoupon({
         code: VALID_COUPON_CODE,
         discountType: DiscountType.Nominal,
@@ -55,7 +55,7 @@ describe("Order", () => {
     });
 
     test("percentage discount ", () => {
-      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, Quantity.Create(3));
       order.applyCoupon({
         code: VALID_COUPON_CODE,
         discountType: DiscountType.Percentage,
@@ -69,13 +69,13 @@ describe("Order", () => {
 
   describe("should create an order with 3 valid products", () => {
     test("without coupon application", () => {
-      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, Quantity.Create(3));
 
       expect(order.total).toBe(150);
     });
 
     test("subTotal should return the price without discounts", () => {
-      const order = new Order(VALID_CPF).addItem(PRODUCT, 3);
+      const order = new Order(VALID_CPF).addItem(PRODUCT, Quantity.Create(3));
 
       order.applyCoupon({
         code: VALID_COUPON_CODE,

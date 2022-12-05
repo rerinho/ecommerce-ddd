@@ -1,13 +1,30 @@
-import Product from "./Product";
+import { ProductId } from "./ProductId";
+import { Price } from "./value-objects/Price";
 import { Quantity } from "./value-objects/Quantity";
+
+export interface CreateOrdemItemOptions {
+  productId: ProductId;
+  quantity: Quantity;
+  price: Price;
+}
 
 export class OrderItem {
   private _quantity: Quantity;
-  private product: Product;
+  private _price: Price;
+  private _productId: ProductId;
 
-  constructor(product: Product, quantity: number) {
-    this.product = product;
-    this._quantity = Quantity.Create(quantity);
+  constructor(options: CreateOrdemItemOptions) {
+    this._productId = options.productId;
+    this._quantity = options.quantity;
+    this._price = options.price;
+  }
+
+  get productId(): ProductId {
+    return this._productId;
+  }
+
+  get price(): number {
+    return this._price.value;
   }
 
   get quantity(): number {
@@ -15,6 +32,6 @@ export class OrderItem {
   }
 
   get total(): number {
-    return this.product.price * this.quantity;
+    return this._price.value * this._quantity.value;
   }
 }
