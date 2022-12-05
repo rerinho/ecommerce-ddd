@@ -1,4 +1,4 @@
-import { Discount } from "../entities/value-objects/Discount";
+import { Discount } from "~/domain/entities/value-objects/Discount";
 import { DiscountCalculator } from "./DiscountCalculator";
 
 export class NominalDiscountCalculator implements DiscountCalculator {

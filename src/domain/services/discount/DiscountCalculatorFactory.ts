@@ -1,4 +1,7 @@
-import { Discount, DiscountType } from "../entities/value-objects/Discount";
+import {
+  Discount,
+  DiscountType,
+} from "~/domain/entities/value-objects/Discount";
 import { NominalDiscountCalculator } from "./NominalDiscountCalculator";
 import { PercentageDiscountCalculator } from "./PercentageDiscountCalculator";
 
