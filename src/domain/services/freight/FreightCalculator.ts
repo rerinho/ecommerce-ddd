@@ -1,7 +1,7 @@
 import { Dimension } from "~/domain/entities/value-objects/Dimension";
 import { Weight } from "~/domain/entities/value-objects/Weight";
 
-interface ShippingPackage {
+export interface ShippingPackage {
   dimension: Dimension;
   weight: Weight;
 }
