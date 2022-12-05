@@ -19,14 +19,6 @@ export class OrderItem {
     this._price = options.price;
   }
 
-  get productId(): ProductId {
-    return this._productId;
-  }
-
-  get price(): number {
-    return this._price.value;
-  }
-
   get quantity(): number {
     return this._quantity.value;
   }
