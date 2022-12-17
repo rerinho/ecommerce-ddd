@@ -33,7 +33,7 @@ describe("FreightCalculator", () => {
     ])(
       "%s => R$ %f",
       (shippingPackages: ShippingPackage[], expectedFreight: number) => {
-        expect(FreightCalculator.calculate(shippingPackages)).toBe(
+        expect(FreightCalculator.calculate(shippingPackages, 1000)).toBe(
           expectedFreight
         );
       }
@@ -50,7 +50,7 @@ describe("FreightCalculator", () => {
           }),
         };
 
-        expect(FreightCalculator.calculate([shippingPackage])).toBe(
+        expect(FreightCalculator.calculate([shippingPackage], 1000)).toBe(
           FreightCalculator.MIN_FREIGHT_VALUE
         );
       });
