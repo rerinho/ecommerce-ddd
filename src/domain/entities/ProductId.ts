@@ -1,17 +1,20 @@
-import { Uuid } from "~/shared/domain/Uuid";
+import { ValueObject } from "~/shared/domain/ValueObject";
+import { Guard } from "~/shared/guard-clauses/GuardClauseBuilder";
 
-export class ProductId {
-  private _id: Uuid;
+interface ProductIdProps {
+  value: string;
+}
 
-  private constructor(id: string) {
-    this._id = Uuid.Create(id);
-  }
-
+export class ProductId extends ValueObject<ProductIdProps> {
   static Create(id: string) {
-    return new ProductId(id);
+    Guard.Create({ argumentName: "productId", value: id })
+      .isValidUuid()
+      .validate();
+
+    return new ProductId({ value: id });
   }
 
-  get value() {
-    return this._id.value;
+  get value(): string {
+    return this.props.value;
   }
 }
