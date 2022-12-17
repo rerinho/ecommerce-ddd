@@ -3,7 +3,6 @@ import { Coupon } from "./Coupon";
 import { OrderItem as OrderItem } from "./OrderItem";
 import Product from "./Product";
 import { Cpf } from "./value-objects/Cpf";
-import { DiscountType } from "./value-objects/Discount";
 import { OrderCode } from "./value-objects/OrderCode";
 import { Quantity } from "./value-objects/Quantity";
 import { Sequence } from "./value-objects/Sequence";
@@ -31,16 +30,16 @@ export class Order {
     );
   }
 
-  get total(): number {
-    return this.subTotal - this.calculateCouponDiscountAmount();
-  }
-
   get orderItems() {
     return this._orderItems;
   }
 
   get orderCode(): OrderCode {
     return this._orderCode;
+  }
+
+  get total(): number {
+    return this.subTotal - this.calculateCouponDiscountAmount();
   }
 
   private calculateCouponDiscountAmount(): number {
@@ -75,19 +74,7 @@ export class Order {
     );
   }
 
-  public applyCoupon(input: {
-    discountValue: number;
-    discountType: DiscountType;
-    code: string;
-    expirationDate: Date;
-  }) {
-    const coupon = new Coupon({
-      code: input.code,
-      discountType: input.discountType,
-      discountValue: input.discountValue,
-      expirationDate: input.expirationDate,
-    });
-
+  public applyCoupon(coupon: Coupon) {
     if (coupon.isExpired()) {
       throw new Error("coupon expired.");
     } else {

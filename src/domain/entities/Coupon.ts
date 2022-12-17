@@ -1,10 +1,9 @@
 import { CouponCode } from "./value-objects/CouponCode";
-import { Discount, DiscountType } from "./value-objects/Discount";
+import { Discount } from "./value-objects/Discount";
 
 export interface CreateCouponArgs {
-  discountValue: number;
-  discountType: DiscountType;
-  code: string;
+  discount: Discount;
+  code: CouponCode;
   expirationDate: Date;
 }
 
@@ -13,22 +12,14 @@ export class Coupon {
   private _discount: Discount;
   private _expirationDate: Date;
 
-  constructor({
-    code,
-    discountValue,
-    discountType,
-    expirationDate,
-  }: CreateCouponArgs) {
-    this._discount = Discount.Create({
-      type: discountType,
-      value: discountValue,
-    });
-    this._code = CouponCode.Create(code);
+  constructor({ code, discount, expirationDate }: CreateCouponArgs) {
+    this._discount = discount;
+    this._code = code;
     this._expirationDate = expirationDate;
   }
 
-  get code(): string {
-    return this._code.value;
+  get code(): CouponCode {
+    return this._code;
   }
 
   get discount(): Discount {

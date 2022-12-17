@@ -1,8 +1,8 @@
+import { VALID_CREATE_COUPON_ARGS } from "@test/utils/factories/entity-factory/CouponFactory";
+import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { DateTool } from "~/shared/tools/DateTool";
 import { Coupon } from "../../../src/domain/entities/Coupon";
 import { DiscountType } from "../../../src/domain/entities/value-objects/Discount";
-
-const VALID_COUPON_CODE = "VALIDCODE123";
 
 describe("Coupon", () => {
   describe("should not allow creating coupon when", () => {
@@ -21,32 +21,23 @@ describe("Coupon", () => {
       expect(
         () =>
           new Coupon({
-            code,
-            discountType: DiscountType.Nominal,
-            discountValue: 10,
-            expirationDate: new Date(),
+            ...VALID_CREATE_COUPON_ARGS,
+            code: CouponCode.Create(code),
           })
       ).toThrow(Error(expectedMessage));
     });
   });
 
   test("should create a coupon when a valid code is entered", () => {
-    const coupon = new Coupon({
-      code: VALID_COUPON_CODE,
-      discountType: DiscountType.Nominal,
-      discountValue: 10,
-      expirationDate: new Date(),
-    });
+    const coupon = new Coupon(VALID_CREATE_COUPON_ARGS);
 
-    expect(coupon.code).toBe(VALID_COUPON_CODE);
+    expect(coupon.code).toBe(VALID_CREATE_COUPON_ARGS.code);
   });
 
   describe("isExpired", () => {
     test("should return FALSE when the coupon expirationDate is after the current date", () => {
       const coupon = new Coupon({
-        code: VALID_COUPON_CODE,
-        discountType: DiscountType.Nominal,
-        discountValue: 10,
+        ...VALID_CREATE_COUPON_ARGS,
         expirationDate: DateTool.addDaysTo(new Date(), 1),
       });
 
@@ -55,9 +46,7 @@ describe("Coupon", () => {
 
     test("should return TRUE when the coupon expirationDate is before the current date", () => {
       const coupon = new Coupon({
-        code: VALID_COUPON_CODE,
-        discountType: DiscountType.Nominal,
-        discountValue: 10,
+        ...VALID_CREATE_COUPON_ARGS,
         expirationDate: DateTool.addDaysTo(new Date(), -1),
       });
 

@@ -7,6 +7,6 @@ export const VALID_CREATE_ORDER_ARGS: CreateOrderArgs = {
   orderSequence: Sequence.Create(1),
 };
 
-export function makeOrderItem(options?: Partial<CreateOrderArgs>) {
+export function makeOrder(options?: Partial<CreateOrderArgs>) {
   return new Order({ ...VALID_CREATE_ORDER_ARGS, ...options });
 }

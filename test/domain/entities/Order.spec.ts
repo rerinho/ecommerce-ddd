@@ -1,4 +1,8 @@
-import { VALID_CREATE_ORDER_ARGS } from "@test/utils/factories/entity-factory/OrderFactory";
+import { makeCoupon } from "@test/utils/factories/entity-factory/CouponFactory";
+import {
+  makeOrder,
+  VALID_CREATE_ORDER_ARGS,
+} from "@test/utils/factories/entity-factory/OrderFactory";
 import { makeProduct } from "@test/utils/factories/entity-factory/ProductFactory";
 import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
 import { Cpf } from "~/domain/entities/value-objects/Cpf";
@@ -7,7 +11,10 @@ import { Quantity } from "~/domain/entities/value-objects/Quantity";
 import { Sequence } from "~/domain/entities/value-objects/Sequence";
 import { DateTool } from "~/shared/tools/DateTool";
 import { Order } from "../../../src/domain/entities/Order";
-import { DiscountType } from "../../../src/domain/entities/value-objects/Discount";
+import {
+  Discount,
+  DiscountType,
+} from "../../../src/domain/entities/value-objects/Discount";
 
 // Constants
 const VALID_CPF = makeCpf();
@@ -90,74 +97,63 @@ describe("Order", () => {
 
   describe("applyCoupon", () => {
     test("should not allow applying expired coupon", () => {
-      const order = new Order({
-        ...VALID_CREATE_ORDER_ARGS,
-        customerCpf: VALID_CPF,
+      const order = makeOrder();
+
+      const expiredCoupon = makeCoupon({
+        expirationDate: DateTool.addDaysTo(new Date(), -1),
       });
 
-      expect(() =>
-        order.applyCoupon({
-          code: VALID_COUPON_CODE,
-          discountType: DiscountType.Nominal,
-          discountValue: 50,
-          expirationDate: DateTool.addDaysTo(new Date(), -1),
-        })
-      ).toThrowError(Error("coupon expired."));
+      expect(() => order.applyCoupon(expiredCoupon)).toThrowError(
+        Error("coupon expired.")
+      );
     });
 
     test("nominal discount ", () => {
-      const order = new Order({
-        ...VALID_CREATE_ORDER_ARGS,
-        customerCpf: VALID_CPF,
-      }).addItem(PRODUCT, Quantity.Create(3));
-      order.applyCoupon({
-        code: VALID_COUPON_CODE,
-        discountType: DiscountType.Nominal,
-        discountValue: 50,
-        expirationDate: VALID_COUPON_EXPIRATION_DATE,
+      const order = makeOrder();
+      order.addItem(PRODUCT, Quantity.Create(3));
+
+      const coupon = makeCoupon({
+        discount: Discount.Create({
+          type: DiscountType.Nominal,
+          value: 50,
+        }),
       });
+
+      order.applyCoupon(coupon);
 
       expect(order.total).toBe(100);
     });
 
     test("percentage discount ", () => {
-      const order = new Order({
-        ...VALID_CREATE_ORDER_ARGS,
-        customerCpf: VALID_CPF,
-      }).addItem(PRODUCT, Quantity.Create(3));
-      order.applyCoupon({
-        code: VALID_COUPON_CODE,
-        discountType: DiscountType.Percentage,
-        discountValue: 0.1,
-        expirationDate: VALID_COUPON_EXPIRATION_DATE,
+      const order = makeOrder();
+      order.addItem(PRODUCT, Quantity.Create(3));
+
+      const coupon = makeCoupon({
+        discount: Discount.Create({
+          type: DiscountType.Percentage,
+          value: 0.1,
+        }),
       });
+
+      order.applyCoupon(coupon);
 
       expect(order.total).toBe(135);
     });
   });
 
-  describe("should create an order with 3 valid products", () => {
-    test("without coupon application", () => {
-      const order = new Order({
-        ...VALID_CREATE_ORDER_ARGS,
-        customerCpf: VALID_CPF,
-      }).addItem(PRODUCT, Quantity.Create(3));
+  describe("subtotal", () => {
+    test("should return the price without discounts", () => {
+      const order = makeOrder();
+      order.addItem(PRODUCT, Quantity.Create(3));
 
-      expect(order.total).toBe(150);
-    });
-
-    test("subTotal should return the price without discounts", () => {
-      const order = new Order({
-        ...VALID_CREATE_ORDER_ARGS,
-        customerCpf: VALID_CPF,
-      }).addItem(PRODUCT, Quantity.Create(3));
-
-      order.applyCoupon({
-        code: VALID_COUPON_CODE,
-        discountType: DiscountType.Nominal,
-        discountValue: 50,
-        expirationDate: VALID_COUPON_EXPIRATION_DATE,
+      const coupon = makeCoupon({
+        discount: Discount.Create({
+          type: DiscountType.Nominal,
+          value: 50,
+        }),
       });
+
+      order.applyCoupon(coupon);
 
       expect(order.subTotal).toBe(150);
     });
