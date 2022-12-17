@@ -14,7 +14,7 @@ export class CouponCode extends ValueObject<CouponCodeProps> {
       .maxLength(CouponCode.COUPON_MAX_LENGTH)
       .validate();
 
-    return new CouponCode({ value: code });
+    return new CouponCode({ value: code.toUpperCase() });
   }
 
   get value(): string {
