@@ -4,7 +4,6 @@ import { Sequence } from "~/domain/entities/value-objects/Sequence";
 describe("OrderCode", () => {
   beforeAll(() => {
     jest.useFakeTimers().setSystemTime(new Date("2021-01-01T03:00:00"));
-    console.log(new Date());
   });
 
   afterAll(() => {
