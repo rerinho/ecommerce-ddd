@@ -1,5 +1,3 @@
-import { generateProduct } from "@test/utils/entity-generator/ProductGenerator";
-import Product from "~/domain/entities/Product";
 import { Dimension } from "~/domain/entities/value-objects/Dimension";
 import { Weight } from "~/domain/entities/value-objects/Weight";
 import {

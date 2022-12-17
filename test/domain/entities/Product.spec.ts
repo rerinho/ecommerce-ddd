@@ -1,4 +1,4 @@
-import { VALID_CREATE_PRODUCT_OPTIONS } from "@test/utils/entity-generator/ProductGenerator";
+import { VALID_CREATE_PRODUCT_ARGS } from "@test/utils/factories/entity-factory/ProductFactory";
 import Product from "~/domain/entities/Product";
 import {
   CreateDimensionArgs,
@@ -14,7 +14,7 @@ describe("Product", () => {
       expect(
         () =>
           new Product({
-            ...VALID_CREATE_PRODUCT_OPTIONS,
+            ...VALID_CREATE_PRODUCT_ARGS,
             price: Price.Create(price),
           })
       ).toThrow(Error);
@@ -25,7 +25,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              ...VALID_CREATE_PRODUCT_OPTIONS,
+              ...VALID_CREATE_PRODUCT_ARGS,
               description: ProductDescription.Create(""),
             })
         ).toThrow(Error);
@@ -35,7 +35,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              ...VALID_CREATE_PRODUCT_OPTIONS,
+              ...VALID_CREATE_PRODUCT_ARGS,
               description: ProductDescription.Create(
                 "A description with more than 20 characters"
               ),
@@ -49,7 +49,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              ...VALID_CREATE_PRODUCT_OPTIONS,
+              ...VALID_CREATE_PRODUCT_ARGS,
               dimension: Dimension.Create({
                 height: 1,
                 length: 0,
@@ -63,7 +63,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              ...VALID_CREATE_PRODUCT_OPTIONS,
+              ...VALID_CREATE_PRODUCT_ARGS,
               dimension: Dimension.Create({
                 height: 1,
                 length: 1,
@@ -77,7 +77,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              ...VALID_CREATE_PRODUCT_OPTIONS,
+              ...VALID_CREATE_PRODUCT_ARGS,
               dimension: Dimension.Create({
                 height: 0,
                 length: 1,
@@ -93,7 +93,7 @@ describe("Product", () => {
         expect(
           () =>
             new Product({
-              ...VALID_CREATE_PRODUCT_OPTIONS,
+              ...VALID_CREATE_PRODUCT_ARGS,
               weight: Weight.Create(weight),
             })
         ).toThrowError(Error("weight must be a positive number."));
@@ -105,7 +105,7 @@ describe("Product", () => {
     test("a positive price", () => {
       expect(
         new Product({
-          ...VALID_CREATE_PRODUCT_OPTIONS,
+          ...VALID_CREATE_PRODUCT_ARGS,
           price: Price.Create(20),
         }).price.value
       ).toBe(20);
@@ -115,7 +115,7 @@ describe("Product", () => {
       test("with length equal than 1 characters", () => {
         expect(
           new Product({
-            ...VALID_CREATE_PRODUCT_OPTIONS,
+            ...VALID_CREATE_PRODUCT_ARGS,
             description: ProductDescription.Create("A"),
           }).description
         ).toBe("A");
@@ -123,7 +123,7 @@ describe("Product", () => {
 
       test(`with length equal than 20 characters`, () => {
         const product = new Product({
-          ...VALID_CREATE_PRODUCT_OPTIONS,
+          ...VALID_CREATE_PRODUCT_ARGS,
           description: ProductDescription.Create("Exactly 20 character"),
         });
 
@@ -134,7 +134,7 @@ describe("Product", () => {
     test("a positive weight", () => {
       expect(
         new Product({
-          ...VALID_CREATE_PRODUCT_OPTIONS,
+          ...VALID_CREATE_PRODUCT_ARGS,
           weight: Weight.Create(10),
         }).weight.value
       ).toBe(10);
@@ -182,7 +182,7 @@ describe("Product", () => {
         expectedValue: number
       ) => {
         const product = new Product({
-          ...VALID_CREATE_PRODUCT_OPTIONS,
+          ...VALID_CREATE_PRODUCT_ARGS,
           dimension: Dimension.Create({
             height,
             length,
