@@ -2,15 +2,14 @@ import { VALID_CREATE_COUPON_ARGS } from "@test/utils/factories/entity-factory/C
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { DateTool } from "~/shared/tools/DateTool";
 import { Coupon } from "../../../src/domain/entities/Coupon";
-import { DiscountType } from "../../../src/domain/entities/value-objects/Discount";
 
 describe("Coupon", () => {
   describe("should not allow creating coupon when", () => {
     test.each([
       [
         "smaller than expected",
-        "COUPONCODE",
-        "code cannot be shorter than  12.",
+        "COUP",
+        "code cannot be shorter than  6.",
       ],
       [
         "longer than expected",
