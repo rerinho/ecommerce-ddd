@@ -2,49 +2,57 @@ import { ValueObject } from "~/shared/domain/ValueObject";
 import { Guard } from "~/shared/guard-clauses/GuardClauseBuilder";
 
 interface DimensionProps {
-  height: number;
-  width: number;
-  length: number;
+  heightInMeters: number;
+  widthInMeters: number;
+  lengthInMeters: number;
 }
 
 export interface CreateDimensionArgs {
-  height: number;
-  width: number;
-  length: number;
+  heightInMeters: number;
+  widthInMeters: number;
+  lengthInMeters: number;
 }
 
 export class Dimension extends ValueObject<DimensionProps> {
-  static Create({ height, length, width }: CreateDimensionArgs) {
-    Guard.Create({ argumentName: "height", value: height })
+  static Create({
+    heightInMeters,
+    lengthInMeters,
+    widthInMeters,
+  }: CreateDimensionArgs) {
+    Guard.Create({ argumentName: "heightInMeters", value: heightInMeters })
       .isPositive()
       .validate();
-    Guard.Create({ argumentName: "width", value: width })
+    Guard.Create({ argumentName: "widthInMeters", value: widthInMeters })
       .isPositive()
       .validate();
-    Guard.Create({ argumentName: "length", value: length })
+    Guard.Create({ argumentName: "lengthInMeters", value: lengthInMeters })
       .isPositive()
       .validate();
 
     return new Dimension({
-      height,
-      length,
-      width,
+      heightInMeters,
+      lengthInMeters,
+      widthInMeters,
     });
   }
 
   get volume(): number {
-    return this.props.height * this.props.width * this.props.length;
+    return (
+      this.props.heightInMeters *
+      this.props.widthInMeters *
+      this.props.lengthInMeters
+    );
   }
 
   get height(): number {
-    return this.props.height;
+    return this.props.heightInMeters;
   }
 
   get width(): number {
-    return this.props.width;
+    return this.props.widthInMeters;
   }
 
   get length(): number {
-    return this.props.length;
+    return this.props.lengthInMeters;
   }
 }

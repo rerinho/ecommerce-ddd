@@ -1,19 +1,14 @@
+import { VALID_CREATE_DIMENSION_ARGS } from "@test/utils/factories/value-object-factory/DimensionFactory";
 import { Dimension } from "~/domain/entities/value-objects/Dimension";
 
-const VALID_CREATE_DIMENSIONS_OPTIONS = {
-  height: 1,
-  width: 1,
-  length: 1,
-};
-
 describe("Dimensions", () => {
-  describe.each(["length", "width", "height"])(
+  describe.each(["lengthInMeters", "widthInMeters", "heightInMeters"])(
     "when the entered %s is non-positive",
     (key: string) => {
       test.each([0, -0.01])("%d", (value: number) => {
         expect(() =>
           Dimension.Create({
-            ...VALID_CREATE_DIMENSIONS_OPTIONS,
+            ...VALID_CREATE_DIMENSION_ARGS,
             [key]: value,
           })
         ).toThrowError(Error(`${key} must be a positive number.`));
@@ -22,11 +17,11 @@ describe("Dimensions", () => {
   );
 
   test("should create a Dimensions instance when a valid dimensions values are entered", () => {
-    const dimension = Dimension.Create(VALID_CREATE_DIMENSIONS_OPTIONS);
+    const dimension = Dimension.Create(VALID_CREATE_DIMENSION_ARGS);
 
     expect(dimension).toBeTruthy();
-    expect(dimension.height).toBe(VALID_CREATE_DIMENSIONS_OPTIONS.height);
-    expect(dimension.length).toBe(VALID_CREATE_DIMENSIONS_OPTIONS.length);
-    expect(dimension.width).toBe(VALID_CREATE_DIMENSIONS_OPTIONS.width);
+    expect(dimension.height).toBe(VALID_CREATE_DIMENSION_ARGS.heightInMeters);
+    expect(dimension.length).toBe(VALID_CREATE_DIMENSION_ARGS.lengthInMeters);
+    expect(dimension.width).toBe(VALID_CREATE_DIMENSION_ARGS.widthInMeters);
   });
 });

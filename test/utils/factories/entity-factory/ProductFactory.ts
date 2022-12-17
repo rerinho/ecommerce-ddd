@@ -9,9 +9,9 @@ export const VALID_CREATE_PRODUCT_ARGS: CreateProductArgs = {
   id: makeProductId(),
   description: ProductDescription.Create("Valid description"),
   dimension: Dimension.Create({
-    height: 1,
-    width: 1,
-    length: 1,
+    heightInMeters: 1,
+    widthInMeters: 1,
+    lengthInMeters: 1,
   }),
   price: Price.Create(50),
   weight: Weight.Create(1),

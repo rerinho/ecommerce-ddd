@@ -51,12 +51,12 @@ describe("Product", () => {
             new Product({
               ...VALID_CREATE_PRODUCT_ARGS,
               dimension: Dimension.Create({
-                height: 1,
-                length: 0,
-                width: 1,
+                heightInMeters: 1,
+                lengthInMeters: 0,
+                widthInMeters: 1,
               }),
             })
-        ).toThrowError(Error("length must be a positive number."));
+        ).toThrowError(Error("lengthInMeters must be a positive number."));
       });
 
       test("with non positive width", () => {
@@ -65,12 +65,12 @@ describe("Product", () => {
             new Product({
               ...VALID_CREATE_PRODUCT_ARGS,
               dimension: Dimension.Create({
-                height: 1,
-                length: 1,
-                width: 0,
+                heightInMeters: 1,
+                lengthInMeters: 1,
+                widthInMeters: 0,
               }),
             })
-        ).toThrowError(Error("width must be a positive number."));
+        ).toThrowError(Error("widthInMeters must be a positive number."));
       });
 
       test("with non positive height", () => {
@@ -79,12 +79,12 @@ describe("Product", () => {
             new Product({
               ...VALID_CREATE_PRODUCT_ARGS,
               dimension: Dimension.Create({
-                height: 0,
-                length: 1,
-                width: 1,
+                heightInMeters: 0,
+                lengthInMeters: 1,
+                widthInMeters: 1,
               }),
             })
-        ).toThrowError(Error("height must be a positive number."));
+        ).toThrowError(Error("heightInMeters must be a positive number."));
       });
     });
 
@@ -145,48 +145,48 @@ describe("Product", () => {
     test.each([
       [
         {
-          height: 1,
-          width: 1,
-          length: 1,
+          heightInMeters: 1,
+          widthInMeters: 1,
+          lengthInMeters: 1,
         },
         1,
       ],
       [
         {
-          height: 0.5,
-          width: 0.1,
-          length: 1,
+          heightInMeters: 0.5,
+          widthInMeters: 0.1,
+          lengthInMeters: 1,
         },
         0.05,
       ],
       [
         {
-          height: 5,
-          width: 7,
-          length: 1,
+          heightInMeters: 5,
+          widthInMeters: 7,
+          lengthInMeters: 1,
         },
         35,
       ],
       [
         {
-          height: 0.72,
-          width: 0.91,
-          length: 1.25,
+          heightInMeters: 0.72,
+          widthInMeters: 0.91,
+          lengthInMeters: 1.25,
         },
         0.819,
       ],
     ])(
       "%s => %f m3",
       (
-        { height, width, length }: CreateDimensionArgs,
+        { heightInMeters, widthInMeters, lengthInMeters }: CreateDimensionArgs,
         expectedValue: number
       ) => {
         const product = new Product({
           ...VALID_CREATE_PRODUCT_ARGS,
           dimension: Dimension.Create({
-            height,
-            length,
-            width,
+            heightInMeters,
+            lengthInMeters,
+            widthInMeters,
           }),
         });
 

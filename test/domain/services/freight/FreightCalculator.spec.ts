@@ -9,18 +9,18 @@ import {
 const GUITAR_PACKAGE = {
   weight: Weight.Create(3),
   dimension: Dimension.Create({
-    height: 100,
-    length: 10,
-    width: 30,
+    heightInMeters: 100,
+    lengthInMeters: 10,
+    widthInMeters: 30,
   }),
 };
 
 const REFRIGERATOR_PACKAGE = {
   weight: Weight.Create(40),
   dimension: Dimension.Create({
-    height: 200,
-    length: 100,
-    width: 50,
+    heightInMeters: 200,
+    lengthInMeters: 100,
+    widthInMeters: 50,
   }),
 };
 
@@ -44,9 +44,9 @@ describe("FreightCalculator", () => {
         const shippingPackage = {
           weight: Weight.Create(1),
           dimension: Dimension.Create({
-            height: 20,
-            length: 15,
-            width: 10,
+            heightInMeters: 20,
+            lengthInMeters: 15,
+            widthInMeters: 10,
           }),
         };
 
