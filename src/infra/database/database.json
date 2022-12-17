@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "id": "71eb413d-7c22-40ea-8c6e-773163b50a7f",
+      "description": "Guitar",
+      "price": 890,
+      "height_in_meters": 100,
+      "length_in_meters": 10,
+      "width_in_meters": 30,
+      "weight": 3
+    },
+    {
+      "id": "05332be5-eb4a-4d41-b937-0d8563306fad",
+      "description": "Refrigerator",
+      "price": 1999.99,
+      "height_in_meters": 200,
+      "length_in_meters": 50,
+      "width_in_meters": 100,
+      "weight": 40
+    },
+    {
+      "id": "c32bc158-758b-4392-b325-9d3a1504cebd",
+      "description": "Headphone",
+      "price": 200,
+      "height_in_meters": 25,
+      "length_in_meters": 10,
+      "width_in_meters": 15,
+      "weight": 0.5
+    }
+  ],
+  "coupons": [
+    {
+      "code": "GET15OFF",
+      "discount_type": "PERCENTAGE",
+      "discount_value": 0.15,
+      "expires_at": "2030-12-17T19:05:38.998Z"
+    }
+  ],
+  "orders": []
+}
