@@ -18,5 +18,9 @@ export const VALID_CREATE_PRODUCT_ARGS: CreateProductArgs = {
 };
 
 export function makeProduct(options?: Partial<CreateProductArgs>) {
-  return new Product({ ...VALID_CREATE_PRODUCT_ARGS, ...options });
+  return new Product({
+    ...VALID_CREATE_PRODUCT_ARGS,
+    id: makeProductId(),
+    ...options,
+  });
 }

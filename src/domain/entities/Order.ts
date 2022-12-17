@@ -71,7 +71,7 @@ export class Order {
 
   public applyCoupon(coupon: Coupon) {
     if (coupon.isExpired()) {
-      throw new Error("coupon expired.");
+      throw new Error("Coupon expired");
     } else {
       this.coupon = coupon;
     }

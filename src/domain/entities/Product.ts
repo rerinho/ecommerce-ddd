@@ -1,8 +1,8 @@
-import { Price } from "./value-objects/Price";
 import { ProductDescription } from "./value-objects/ProductDescription";
 import { Dimension } from "./value-objects/Dimension";
 import { Weight } from "./value-objects/Weight";
 import { ProductId } from "./ProductId";
+import { Price } from "./value-objects/Price";
 
 export interface CreateProductArgs {
   id: ProductId;

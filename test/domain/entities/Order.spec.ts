@@ -1,20 +1,20 @@
 import { makeCoupon } from "@test/utils/factories/entity-factory/CouponFactory";
 import {
-  makeOrder,
   VALID_CREATE_ORDER_ARGS,
+  makeOrder,
 } from "@test/utils/factories/entity-factory/OrderFactory";
 import { makeOrderItem } from "@test/utils/factories/entity-factory/OrderItemFactory";
 import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
+import { Order } from "~/domain/entities/Order";
 import { Cpf } from "~/domain/entities/value-objects/Cpf";
+import {
+  Discount,
+  DiscountType,
+} from "~/domain/entities/value-objects/Discount";
 import { Price } from "~/domain/entities/value-objects/Price";
 import { Quantity } from "~/domain/entities/value-objects/Quantity";
 import { Sequence } from "~/domain/entities/value-objects/Sequence";
 import { DateTool } from "~/shared/tools/DateTool";
-import { Order } from "../../../src/domain/entities/Order";
-import {
-  Discount,
-  DiscountType,
-} from "../../../src/domain/entities/value-objects/Discount";
 
 // Constants
 const VALID_CPF = makeCpf();
@@ -104,7 +104,7 @@ describe("Order", () => {
       });
 
       expect(() => order.applyCoupon(expiredCoupon)).toThrowError(
-        Error("coupon expired.")
+        Error("Coupon expired")
       );
     });
 
