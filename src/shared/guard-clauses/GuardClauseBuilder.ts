@@ -9,6 +9,8 @@ import {
   CreateGuardClauseOptions,
   GuardClause,
 } from "./clausules/abstract/GuardClause";
+import { IsGreaterOrEqualThan } from "./clausules/IsGreaterOrEqualThan";
+import { IsLessOrEqualThan } from "./clausules/IsLessOrEqualThan";
 import { IsValidUuid } from "./clausules/IsValidUuid";
 
 export class Guard {
@@ -82,6 +84,28 @@ export class Guard {
       new IsValidUuid({
         value: this.value,
         argumentName: this.argumentName,
+      })
+    );
+    return this;
+  }
+
+  greaterOrEqualThan(value: number) {
+    this.addGuardClause(
+      new IsGreaterOrEqualThan({
+        value: this.value,
+        argumentName: this.argumentName,
+        minValue: value,
+      })
+    );
+    return this;
+  }
+
+  lessOrEqualThan(value: number) {
+    this.addGuardClause(
+      new IsLessOrEqualThan({
+        value: this.value,
+        argumentName: this.argumentName,
+        maxValue: value,
       })
     );
     return this;
