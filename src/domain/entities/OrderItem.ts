@@ -13,10 +13,10 @@ export class OrderItem {
   private _price: Price;
   private _productId: ProductId;
 
-  constructor(options: CreateOrdemItemArgs) {
-    this._productId = options.productId;
-    this._quantity = options.quantity;
-    this._price = options.price;
+  constructor(args: CreateOrdemItemArgs) {
+    this._productId = args.productId;
+    this._quantity = args.quantity;
+    this._price = args.price;
   }
 
   get productId(): ProductId {

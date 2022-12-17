@@ -3,7 +3,7 @@ import {
   makeOrder,
   VALID_CREATE_ORDER_ARGS,
 } from "@test/utils/factories/entity-factory/OrderFactory";
-import { makeProduct } from "@test/utils/factories/entity-factory/ProductFactory";
+import { makeOrderItem } from "@test/utils/factories/entity-factory/OrderItemFactory";
 import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
 import { Cpf } from "~/domain/entities/value-objects/Cpf";
 import { Price } from "~/domain/entities/value-objects/Price";
@@ -19,12 +19,6 @@ import {
 // Constants
 const VALID_CPF = makeCpf();
 const INVALID_RAW_CPF = "111111111";
-const VALID_COUPON_CODE = "COUPONCODE12";
-const VALID_COUPON_EXPIRATION_DATE = DateTool.addDaysTo(new Date(), 10);
-
-const PRODUCT = makeProduct({
-  price: Price.Create(50),
-});
 
 describe("Order", () => {
   beforeAll(() => {
@@ -74,8 +68,12 @@ describe("Order", () => {
         ...VALID_CREATE_ORDER_ARGS,
         customerCpf: VALID_CPF,
       });
+      const orderItem = makeOrderItem({
+        price: Price.Create(50),
+        quantity: Quantity.Create(2),
+      });
 
-      order.addItem(PRODUCT, Quantity.Create(2));
+      order.addItem(orderItem);
 
       expect(order.orderItems).toHaveLength(1);
       expect(order.orderItems[0].quantity).toBe(2);
@@ -86,12 +84,14 @@ describe("Order", () => {
         ...VALID_CREATE_ORDER_ARGS,
         customerCpf: VALID_CPF,
       });
+      const orderItem = makeOrderItem({
+        price: Price.Create(50),
+        quantity: Quantity.Create(1),
+      });
 
-      order.addItem(PRODUCT, Quantity.Create(1));
+      order.addItem(orderItem);
 
-      expect(() => order.addItem(PRODUCT, Quantity.Create(1))).toThrow(
-        Error("Duplicated item.")
-      );
+      expect(() => order.addItem(orderItem)).toThrow(Error("Duplicated item."));
     });
   });
 
@@ -110,7 +110,11 @@ describe("Order", () => {
 
     test("nominal discount ", () => {
       const order = makeOrder();
-      order.addItem(PRODUCT, Quantity.Create(3));
+      const orderItem = makeOrderItem({
+        price: Price.Create(50),
+        quantity: Quantity.Create(3),
+      });
+      order.addItem(orderItem);
 
       const coupon = makeCoupon({
         discount: Discount.Create({
@@ -126,7 +130,11 @@ describe("Order", () => {
 
     test("percentage discount ", () => {
       const order = makeOrder();
-      order.addItem(PRODUCT, Quantity.Create(3));
+      const orderItem = makeOrderItem({
+        price: Price.Create(50),
+        quantity: Quantity.Create(3),
+      });
+      order.addItem(orderItem);
 
       const coupon = makeCoupon({
         discount: Discount.Create({
@@ -144,7 +152,10 @@ describe("Order", () => {
   describe("subtotal", () => {
     test("should return the price without discounts", () => {
       const order = makeOrder();
-      order.addItem(PRODUCT, Quantity.Create(3));
+      const orderItem = makeOrderItem({
+        quantity: Quantity.Create(3),
+      });
+      order.addItem(orderItem);
 
       const coupon = makeCoupon({
         discount: Discount.Create({

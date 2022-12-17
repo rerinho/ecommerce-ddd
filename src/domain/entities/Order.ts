@@ -18,9 +18,9 @@ export class Order {
   private _orderItems: OrderItem[] = [];
   private _orderCode: OrderCode;
 
-  constructor(options: CreateOrderArgs) {
-    this.customerCpf = options.customerCpf;
-    this._orderCode = OrderCode.Create(options.orderSequence);
+  constructor(args: CreateOrderArgs) {
+    this.customerCpf = args.customerCpf;
+    this._orderCode = OrderCode.Create(args.orderSequence);
   }
 
   get subTotal(): number {
@@ -54,23 +54,18 @@ export class Order {
     return discountCalculator.calculate(this.subTotal, this.coupon.discount);
   }
 
-  public addItem(product: Product, quantity: Quantity) {
-    if (this.hasAlreadyAdded(product)) {
+  public addItem(orderItem: OrderItem) {
+    if (this.hasAlreadyAdded(orderItem)) {
       throw new Error("Duplicated item.");
     }
 
-    const orderItem = new OrderItem({
-      price: product.price,
-      productId: product.id,
-      quantity,
-    });
     this._orderItems.push(orderItem);
     return this;
   }
 
-  private hasAlreadyAdded(product: Product) {
-    return this._orderItems.some(
-      (orderItem) => orderItem.productId === product.id
+  private hasAlreadyAdded(newOrderItem: OrderItem) {
+    return this._orderItems.some((orderItem) =>
+      orderItem.productId.equals(newOrderItem.productId)
     );
   }
 
