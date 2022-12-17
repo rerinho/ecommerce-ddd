@@ -9,7 +9,7 @@ import {
   CreateGuardClauseOptions,
   GuardClause,
 } from "./clausules/abstract/GuardClause";
-import { IsValidUuid } from "./clausules/IsUuid";
+import { IsValidUuid } from "./clausules/IsValidUuid";
 
 export class Guard {
   private guardClauses: GuardClause[];
