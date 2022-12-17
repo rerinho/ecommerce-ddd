@@ -45,8 +45,8 @@ export default class Product {
     return this._dimension;
   }
 
-  get description(): string {
-    return this._description.value;
+  get description(): ProductDescription {
+    return this._description;
   }
 
   get weight(): Weight {

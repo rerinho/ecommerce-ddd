@@ -113,12 +113,12 @@ describe("Product", () => {
 
     describe("a valid description", () => {
       test("with length equal than 1 characters", () => {
-        expect(
-          new Product({
-            ...VALID_CREATE_PRODUCT_ARGS,
-            description: ProductDescription.Create("A"),
-          }).description
-        ).toBe("A");
+        const product = new Product({
+          ...VALID_CREATE_PRODUCT_ARGS,
+          description: ProductDescription.Create("A"),
+        });
+
+        expect(product.description.value).toBe("A");
       });
 
       test(`with length equal than 20 characters`, () => {
@@ -127,7 +127,7 @@ describe("Product", () => {
           description: ProductDescription.Create("Exactly 20 character"),
         });
 
-        expect(product.description).toBe("Exactly 20 character");
+        expect(product.description.value).toBe("Exactly 20 character");
       });
     });
 
