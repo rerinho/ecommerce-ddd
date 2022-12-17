@@ -2,7 +2,7 @@ import { ProductId } from "./ProductId";
 import { Price } from "./value-objects/Price";
 import { Quantity } from "./value-objects/Quantity";
 
-export interface CreateOrdemItemOptions {
+export interface CreateOrdemItemArgs {
   productId: ProductId;
   quantity: Quantity;
   price: Price;
@@ -13,7 +13,7 @@ export class OrderItem {
   private _price: Price;
   private _productId: ProductId;
 
-  constructor(options: CreateOrdemItemOptions) {
+  constructor(options: CreateOrdemItemArgs) {
     this._productId = options.productId;
     this._quantity = options.quantity;
     this._price = options.price;

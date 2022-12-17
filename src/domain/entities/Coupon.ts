@@ -1,7 +1,7 @@
 import { CouponCode } from "./value-objects/CouponCode";
 import { Discount, DiscountType } from "./value-objects/Discount";
 
-export interface CreateCouponOptions {
+export interface CreateCouponArgs {
   discountValue: number;
   discountType: DiscountType;
   code: string;
@@ -18,7 +18,7 @@ export class Coupon {
     discountValue,
     discountType,
     expirationDate,
-  }: CreateCouponOptions) {
+  }: CreateCouponArgs) {
     this._discount = Discount.Create({
       type: discountType,
       value: discountValue,

@@ -6,7 +6,7 @@ import { Cpf } from "./value-objects/Cpf";
 import { DiscountType } from "./value-objects/Discount";
 import { Quantity } from "./value-objects/Quantity";
 
-interface CreateOrderOptions {
+interface CreateOrderArgs {
   customerCpf: Cpf;
 }
 
@@ -15,7 +15,7 @@ export class Order {
   private coupon?: Coupon;
   private _orderItems: OrderItem[] = [];
 
-  constructor(options: CreateOrderOptions) {
+  constructor(options: CreateOrderArgs) {
     this.customerCpf = options.customerCpf;
   }
 

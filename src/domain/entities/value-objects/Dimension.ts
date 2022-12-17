@@ -7,14 +7,14 @@ interface DimensionProps {
   length: number;
 }
 
-export interface CreateDimensionOptions {
+export interface CreateDimensionArgs {
   height: number;
   width: number;
   length: number;
 }
 
 export class Dimension extends ValueObject<DimensionProps> {
-  static Create({ height, length, width }: CreateDimensionOptions) {
+  static Create({ height, length, width }: CreateDimensionArgs) {
     Guard.Create({ argumentName: "height", value: height })
       .isPositive()
       .validate();

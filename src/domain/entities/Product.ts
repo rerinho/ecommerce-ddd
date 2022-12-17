@@ -4,7 +4,7 @@ import { Dimension } from "./value-objects/Dimension";
 import { Weight } from "./value-objects/Weight";
 import { ProductId } from "./ProductId";
 
-export interface CreateProductOptions {
+export interface CreateProductArgs {
   id: ProductId;
   description: string;
   price: Price;
@@ -25,7 +25,7 @@ export default class Product {
     dimension,
     price,
     weight,
-  }: CreateProductOptions) {
+  }: CreateProductArgs) {
     this._id = id;
     this._description = ProductDescription.Create(description);
     this._price = price;

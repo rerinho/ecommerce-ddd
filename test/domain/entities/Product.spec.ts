@@ -1,7 +1,7 @@
 import { VALID_CREATE_PRODUCT_OPTIONS } from "@test/utils/entity-generator/ProductGenerator";
 import Product from "~/domain/entities/Product";
 import {
-  CreateDimensionOptions,
+  CreateDimensionArgs,
   Dimension,
 } from "~/domain/entities/value-objects/Dimension";
 import { Price } from "~/domain/entities/value-objects/Price";
@@ -175,7 +175,7 @@ describe("Product", () => {
     ])(
       "%s => %f m3",
       (
-        { height, width, length }: CreateDimensionOptions,
+        { height, width, length }: CreateDimensionArgs,
         expectedValue: number
       ) => {
         const product = new Product({
