@@ -1,12 +1,13 @@
 import Product, { CreateProductArgs } from "~/domain/entities/Product";
 import { Dimension } from "~/domain/entities/value-objects/Dimension";
 import { Price } from "~/domain/entities/value-objects/Price";
+import { ProductDescription } from "~/domain/entities/value-objects/ProductDescription";
 import { Weight } from "~/domain/entities/value-objects/Weight";
 import { generateProductId } from "../value-generator/ProductIdGenerator";
 
 export const VALID_CREATE_PRODUCT_OPTIONS: CreateProductArgs = {
   id: generateProductId(),
-  description: "Valid description",
+  description: ProductDescription.Create("Valid description"),
   dimension: Dimension.Create({
     height: 1,
     width: 1,

@@ -5,6 +5,7 @@ import {
   Dimension,
 } from "~/domain/entities/value-objects/Dimension";
 import { Price } from "~/domain/entities/value-objects/Price";
+import { ProductDescription } from "~/domain/entities/value-objects/ProductDescription";
 import { Weight } from "~/domain/entities/value-objects/Weight";
 
 describe("Product", () => {
@@ -25,7 +26,7 @@ describe("Product", () => {
           () =>
             new Product({
               ...VALID_CREATE_PRODUCT_OPTIONS,
-              description: "",
+              description: ProductDescription.Create(""),
             })
         ).toThrow(Error);
       });
@@ -35,7 +36,9 @@ describe("Product", () => {
           () =>
             new Product({
               ...VALID_CREATE_PRODUCT_OPTIONS,
-              description: "A description with more than 20 characters",
+              description: ProductDescription.Create(
+                "A description with more than 20 characters"
+              ),
             })
         ).toThrow(Error);
       });
@@ -113,15 +116,15 @@ describe("Product", () => {
         expect(
           new Product({
             ...VALID_CREATE_PRODUCT_OPTIONS,
-            description: "A",
+            description: ProductDescription.Create("A"),
           }).description
         ).toBe("A");
       });
 
-      test("with length equal than 20 characters", () => {
+      test(`with length equal than 20 characters`, () => {
         const product = new Product({
           ...VALID_CREATE_PRODUCT_OPTIONS,
-          description: "Exactly 20 character",
+          description: ProductDescription.Create("Exactly 20 character"),
         });
 
         expect(product.description).toBe("Exactly 20 character");
