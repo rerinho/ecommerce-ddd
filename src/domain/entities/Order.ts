@@ -4,19 +4,24 @@ import { OrderItem as OrderItem } from "./OrderItem";
 import Product from "./Product";
 import { Cpf } from "./value-objects/Cpf";
 import { DiscountType } from "./value-objects/Discount";
+import { OrderCode } from "./value-objects/OrderCode";
 import { Quantity } from "./value-objects/Quantity";
+import { Sequence } from "./value-objects/Sequence";
 
-interface CreateOrderArgs {
+export interface CreateOrderArgs {
   customerCpf: Cpf;
+  orderSequence: Sequence;
 }
 
 export class Order {
   private customerCpf: Cpf;
   private coupon?: Coupon;
   private _orderItems: OrderItem[] = [];
+  private _orderCode: OrderCode;
 
   constructor(options: CreateOrderArgs) {
     this.customerCpf = options.customerCpf;
+    this._orderCode = OrderCode.Create(options.orderSequence);
   }
 
   get subTotal(): number {
@@ -30,6 +35,14 @@ export class Order {
     return this.subTotal - this.calculateCouponDiscountAmount();
   }
 
+  get orderItems() {
+    return this._orderItems;
+  }
+
+  get orderCode(): OrderCode {
+    return this._orderCode;
+  }
+
   private calculateCouponDiscountAmount(): number {
     if (!this.coupon) {
       return 0;
@@ -40,10 +53,6 @@ export class Order {
     );
 
     return discountCalculator.calculate(this.subTotal, this.coupon.discount);
-  }
-
-  get orderItems() {
-    return this._orderItems;
   }
 
   public addItem(product: Product, quantity: Quantity) {

@@ -1,4 +1,4 @@
-import { CREATE_ORDEM_ITEM_ARGS } from "@test/utils/factories/entity-factory/OrderItemFactory";
+import { VALID_CREATE_ORDEM_ITEM_ARGS } from "@test/utils/factories/entity-factory/OrderItemFactory";
 import { Price } from "~/domain/entities/value-objects/Price";
 import { Quantity } from "~/domain/entities/value-objects/Quantity";
 
@@ -9,7 +9,7 @@ describe("OrderItem", () => {
     expect(
       () =>
         new OrderItem({
-          ...CREATE_ORDEM_ITEM_ARGS,
+          ...VALID_CREATE_ORDEM_ITEM_ARGS,
           quantity: Quantity.Create(0),
         })
     ).toThrowError(Error("quantity must be a positive number."));
@@ -17,7 +17,7 @@ describe("OrderItem", () => {
 
   test("should create an OrderItem instance when a valid product and quantity are entered", () => {
     const orderItem = new OrderItem({
-      ...CREATE_ORDEM_ITEM_ARGS,
+      ...VALID_CREATE_ORDEM_ITEM_ARGS,
       quantity: Quantity.Create(1),
     });
 
@@ -27,7 +27,7 @@ describe("OrderItem", () => {
 
   test("should calculate total value correctly based on the price of the product", () => {
     const orderItem = new OrderItem({
-      ...CREATE_ORDEM_ITEM_ARGS,
+      ...VALID_CREATE_ORDEM_ITEM_ARGS,
       price: Price.Create(50),
       quantity: Quantity.Create(3),
     });
