@@ -1,5 +1,6 @@
 import { VALID_CREATE_PRODUCT_ARGS } from "@test/utils/factories/entity-factory/ProductFactory";
 import Product from "~/domain/entities/Product";
+import { ProductId } from "~/domain/entities/ProductId";
 import {
   CreateDimensionArgs,
   Dimension,
@@ -9,95 +10,104 @@ import { ProductDescription } from "~/domain/entities/value-objects/ProductDescr
 import { Weight } from "~/domain/entities/value-objects/Weight";
 
 describe("Product", () => {
-  describe("should not allow creating a product with", () => {
-    test.each([-1, 0])("a non positive price: %f", (price: number) => {
-      expect(
-        () =>
-          new Product({
-            ...VALID_CREATE_PRODUCT_ARGS,
-            price: Price.Create(price),
-          })
-      ).toThrow(Error);
-    });
-
-    describe("invalid description", () => {
-      test("with length less than 1 characters", () => {
+  describe("product instantiation", () => {
+    describe("should not allow creating a product with", () => {
+      test.each([-1, 0])("a non positive price: %f", (price: number) => {
         expect(
           () =>
             new Product({
               ...VALID_CREATE_PRODUCT_ARGS,
-              description: ProductDescription.Create(""),
+              price: Price.Create(price),
             })
         ).toThrow(Error);
       });
 
-      test("with length longer than 20 characters", () => {
-        expect(
-          () =>
-            new Product({
-              ...VALID_CREATE_PRODUCT_ARGS,
-              description: ProductDescription.Create(
-                "A description with more than 20 characters"
-              ),
-            })
-        ).toThrow(Error);
+      describe("invalid description", () => {
+        test("with length less than 1 characters", () => {
+          expect(
+            () =>
+              new Product({
+                ...VALID_CREATE_PRODUCT_ARGS,
+                description: ProductDescription.Create(""),
+              })
+          ).toThrow(Error);
+        });
+
+        test("with length longer than 20 characters", () => {
+          expect(
+            () =>
+              new Product({
+                ...VALID_CREATE_PRODUCT_ARGS,
+                description: ProductDescription.Create(
+                  "A description with more than 20 characters"
+                ),
+              })
+          ).toThrow(Error);
+        });
+      });
+
+      describe("invalid dimensions", () => {
+        test("with non positive length", () => {
+          expect(
+            () =>
+              new Product({
+                ...VALID_CREATE_PRODUCT_ARGS,
+                dimension: Dimension.Create({
+                  heightInMeters: 1,
+                  lengthInMeters: 0,
+                  widthInMeters: 1,
+                }),
+              })
+          ).toThrowError(Error("lengthInMeters must be a positive number."));
+        });
+
+        test("with non positive width", () => {
+          expect(
+            () =>
+              new Product({
+                ...VALID_CREATE_PRODUCT_ARGS,
+                dimension: Dimension.Create({
+                  heightInMeters: 1,
+                  lengthInMeters: 1,
+                  widthInMeters: 0,
+                }),
+              })
+          ).toThrowError(Error("widthInMeters must be a positive number."));
+        });
+
+        test("with non positive height", () => {
+          expect(
+            () =>
+              new Product({
+                ...VALID_CREATE_PRODUCT_ARGS,
+                dimension: Dimension.Create({
+                  heightInMeters: 0,
+                  lengthInMeters: 1,
+                  widthInMeters: 1,
+                }),
+              })
+          ).toThrowError(Error("heightInMeters must be a positive number."));
+        });
+      });
+
+      describe("invalid weight", () => {
+        test.each([[0], [-1]])("%d", (weight: number) => {
+          expect(
+            () =>
+              new Product({
+                ...VALID_CREATE_PRODUCT_ARGS,
+                weight: Weight.Create(weight),
+              })
+          ).toThrowError(Error("weight must be a positive number."));
+        });
       });
     });
 
-    describe("invalid dimensions", () => {
-      test("with non positive length", () => {
-        expect(
-          () =>
-            new Product({
-              ...VALID_CREATE_PRODUCT_ARGS,
-              dimension: Dimension.Create({
-                heightInMeters: 1,
-                lengthInMeters: 0,
-                widthInMeters: 1,
-              }),
-            })
-        ).toThrowError(Error("lengthInMeters must be a positive number."));
-      });
+    test("should create an ProductId when no ID is entered on creation", () => {
+      const product = new Product(VALID_CREATE_PRODUCT_ARGS);
 
-      test("with non positive width", () => {
-        expect(
-          () =>
-            new Product({
-              ...VALID_CREATE_PRODUCT_ARGS,
-              dimension: Dimension.Create({
-                heightInMeters: 1,
-                lengthInMeters: 1,
-                widthInMeters: 0,
-              }),
-            })
-        ).toThrowError(Error("widthInMeters must be a positive number."));
-      });
-
-      test("with non positive height", () => {
-        expect(
-          () =>
-            new Product({
-              ...VALID_CREATE_PRODUCT_ARGS,
-              dimension: Dimension.Create({
-                heightInMeters: 0,
-                lengthInMeters: 1,
-                widthInMeters: 1,
-              }),
-            })
-        ).toThrowError(Error("heightInMeters must be a positive number."));
-      });
-    });
-
-    describe("invalid weight", () => {
-      test.each([[0], [-1]])("%d", (weight: number) => {
-        expect(
-          () =>
-            new Product({
-              ...VALID_CREATE_PRODUCT_ARGS,
-              weight: Weight.Create(weight),
-            })
-        ).toThrowError(Error("weight must be a positive number."));
-      });
+      expect(product.id).toBeTruthy();
+      expect(product.id).toBeInstanceOf(ProductId);
     });
   });
 
