@@ -1,10 +1,8 @@
 import { DiscountCalculatorFactory } from "../services/discount/DiscountCalculatorFactory";
 import { Coupon } from "./Coupon";
 import { OrderItem as OrderItem } from "./OrderItem";
-import Product from "./Product";
 import { Cpf } from "./value-objects/Cpf";
 import { OrderCode } from "./value-objects/OrderCode";
-import { Quantity } from "./value-objects/Quantity";
 import { Sequence } from "./value-objects/Sequence";
 
 export interface CreateOrderArgs {
