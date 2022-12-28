@@ -1,11 +1,11 @@
 import { isInteger as lodashIsInteger } from "lodash";
 
 export class NumberTool {
-  static isPositive(value: unknown) {
-    return typeof value === "number" && value > 0;
+  static isPositive(value: number) {
+    return value > 0;
   }
 
-  static isInteger(value: unknown) {
+  static isInteger(value: number) {
     return lodashIsInteger(value);
   }
 }

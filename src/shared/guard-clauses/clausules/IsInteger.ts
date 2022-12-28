@@ -9,6 +9,6 @@ export class IsInteger extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return NumberTool.isInteger(this.value);
+    return typeof this.value === "number" && NumberTool.isInteger(this.value);
   }
 }

@@ -14,6 +14,9 @@ export class MaxLength extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return StringTool.hasLengthSmallOrEqualTo(this.value, this.length);
+    return (
+      typeof this.value === "string" &&
+      StringTool.hasLengthSmallOrEqualTo(this.value, this.length)
+    );
   }
 }

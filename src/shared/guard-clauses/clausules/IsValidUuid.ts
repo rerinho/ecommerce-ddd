@@ -10,6 +10,6 @@ export class IsValidUuid extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return UuidTool.isValidUuid(this.value);
+    return typeof this.value === "string" && UuidTool.isValidUuid(this.value);
   }
 }

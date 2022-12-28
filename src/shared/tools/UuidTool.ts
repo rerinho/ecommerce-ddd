@@ -5,9 +5,7 @@ export class UuidTool {
     return uuid();
   }
 
-  static isValidUuid(uuid: unknown) {
-    return (
-      typeof uuid === "string" && validate(uuid) && uuidVersion(uuid) === 4
-    );
+  static isValidUuid(uuid: string) {
+    return validate(uuid) && uuidVersion(uuid) === 4;
   }
 }

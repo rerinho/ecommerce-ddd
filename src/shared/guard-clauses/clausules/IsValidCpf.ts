@@ -7,6 +7,6 @@ export class IsValidCpf extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return CpfTool.isValidCpf(this.value);
+    return typeof this.value === "string" && CpfTool.isValidCpf(this.value);
   }
 }

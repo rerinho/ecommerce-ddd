@@ -10,6 +10,6 @@ export class IsPositive extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return NumberTool.isPositive(this.value);
+    return typeof this.value === "number" && NumberTool.isPositive(this.value);
   }
 }
