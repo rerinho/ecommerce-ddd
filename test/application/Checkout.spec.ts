@@ -1,7 +1,7 @@
 import { makeCoupon } from "@test/utils/factories/entity-factory/CouponFactory";
 import { makeProduct } from "@test/utils/factories/entity-factory/ProductFactory";
 import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
-import { Checkout, CheckoutInput } from "~/application/Checkout";
+import { Checkout, CheckoutInput } from "~/application/use-cases/Checkout";
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { Cpf } from "~/domain/entities/value-objects/Cpf";
 import {
