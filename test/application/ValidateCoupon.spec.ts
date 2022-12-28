@@ -1,5 +1,5 @@
 import { makeCoupon } from "@test/utils/factories/entity-factory/CouponFactory";
-import { ValidateCoupon } from "~/application/ValidateCoupon";
+import { ValidateCoupon } from "~/application/use-cases/ValidateCoupon";
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { CouponRepository } from "~/domain/repositories/CouponRepository";
 import { CouponInMemoryRepository } from "~/infra/repositories/in-memory/CouponInMemoryRepository";
