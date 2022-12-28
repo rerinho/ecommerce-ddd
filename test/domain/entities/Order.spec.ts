@@ -6,6 +6,7 @@ import {
 import { makeOrderItem } from "@test/utils/factories/entity-factory/OrderItemFactory";
 import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
 import { Order } from "~/domain/entities/Order";
+import { OrderId } from "~/domain/entities/OrderId";
 import { Cpf } from "~/domain/entities/value-objects/Cpf";
 import {
   Discount,
@@ -17,7 +18,6 @@ import { Sequence } from "~/domain/entities/value-objects/Sequence";
 import { DateTool } from "~/shared/tools/DateTool";
 
 // Constants
-const VALID_CPF = makeCpf();
 const INVALID_RAW_CPF = "111111111";
 
 describe("Order", () => {
@@ -60,14 +60,18 @@ describe("Order", () => {
 
       expect(order.orderCode.value).toBe("202100000001");
     });
+
+    test("should create an OrderId when no ID is entered on creation", () => {
+      const order = new Order(VALID_CREATE_ORDER_ARGS);
+
+      expect(order.id).toBeTruthy();
+      expect(order.id).toBeInstanceOf(OrderId);
+    });
   });
 
   describe("addItem", () => {
     test("should add an item in the order", () => {
-      const order = new Order({
-        ...VALID_CREATE_ORDER_ARGS,
-        customerCpf: VALID_CPF,
-      });
+      const order = new Order(VALID_CREATE_ORDER_ARGS);
       const orderItem = makeOrderItem({
         price: Price.Create(50),
         quantity: Quantity.Create(2),
@@ -80,10 +84,7 @@ describe("Order", () => {
     });
 
     test("should not allow adding a duplicated item", () => {
-      const order = new Order({
-        ...VALID_CREATE_ORDER_ARGS,
-        customerCpf: VALID_CPF,
-      });
+      const order = new Order(VALID_CREATE_ORDER_ARGS);
       const orderItem = makeOrderItem({
         price: Price.Create(50),
         quantity: Quantity.Create(1),
