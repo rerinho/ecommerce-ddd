@@ -1,23 +1,27 @@
 import { DiscountCalculatorFactory } from "../services/discount/DiscountCalculatorFactory";
 import { Coupon } from "./Coupon";
+import { OrderId } from "./OrderId";
 import { OrderItem as OrderItem } from "./OrderItem";
 import { Cpf } from "./value-objects/Cpf";
 import { OrderCode } from "./value-objects/OrderCode";
 import { Sequence } from "./value-objects/Sequence";
 
 export interface CreateOrderArgs {
+  id?: OrderId;
   customerCpf: Cpf;
   orderSequence: Sequence;
 }
 
 export class Order {
-  private customerCpf: Cpf;
+  private _id: OrderId;
+  private _customerCpf: Cpf;
   private coupon?: Coupon;
   private _orderItems: OrderItem[] = [];
   private _orderCode: OrderCode;
 
   constructor(args: CreateOrderArgs) {
-    this.customerCpf = args.customerCpf;
+    this._id = args.id || OrderId.Create();
+    this._customerCpf = args.customerCpf;
     this._orderCode = OrderCode.Create(args.orderSequence);
   }
 
@@ -26,6 +30,14 @@ export class Order {
       (total, orderItem) => total + orderItem.total,
       0
     );
+  }
+
+  get id(): OrderId {
+    return this._id;
+  }
+
+  get customerCpf(): Cpf {
+    return this._customerCpf;
   }
 
   get orderItems() {

@@ -26,7 +26,7 @@ export default class Product {
     price,
     weight,
   }: CreateProductArgs) {
-    this._id = id;
+    this._id = id || ProductId.Create();
     this._description = description;
     this._price = price;
     this._weight = weight;

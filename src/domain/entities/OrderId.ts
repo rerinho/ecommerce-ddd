@@ -2,19 +2,19 @@ import { ValueObject } from "~/shared/domain/ValueObject";
 import { Guard } from "~/shared/guard-clauses/GuardClauseBuilder";
 import { UuidTool } from "~/shared/tools/UuidTool";
 
-interface ProductIdProps {
+interface OrderIdProps {
   value: string;
 }
 
-export class ProductId extends ValueObject<ProductIdProps> {
+export class OrderId extends ValueObject<OrderIdProps> {
   static Create(id?: string) {
     if (id) {
-      Guard.Create({ argumentName: "productId", value: id })
+      Guard.Create({ argumentName: "orderId", value: id })
         .isValidUuid()
         .validate();
     }
 
-    return new ProductId({ value: id || UuidTool.generate() });
+    return new OrderId({ value: id || UuidTool.generate() });
   }
 
   get value(): string {
