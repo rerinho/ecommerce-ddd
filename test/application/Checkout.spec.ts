@@ -14,7 +14,7 @@ import { CouponInMemoryRepository } from "~/infra/repositories/in-memory/CouponI
 import { OrderInMemoryRepository } from "~/infra/repositories/in-memory/OrderInMemoryRepository";
 import { ProductInMemoryRepository } from "~/infra/repositories/in-memory/ProductInMemoryRepository";
 import { DateTool } from "~/common/tools/DateTool";
-import { UuidTool } from "~/common/tools/UuidTool";
+import { randomUUID } from "crypto";
 
 // Constants
 const cpf: Cpf = makeCpf();
@@ -147,7 +147,7 @@ describe("Checkout", () => {
 
   describe("should throw an exception", () => {
     test("when a nonexistent productId is entered", async () => {
-      const invalidProductId = UuidTool.generate();
+      const invalidProductId = randomUUID();
       const input: CheckoutInput = {
         customerCpf: cpf.value,
         items: [
