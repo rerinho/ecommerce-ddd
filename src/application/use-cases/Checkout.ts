@@ -36,22 +36,25 @@ export class Checkout {
     items,
     couponCode: rawCouponCode,
   }: CheckoutInput): Promise<CheckoutOutput> {
-    const cpf = Cpf.Create(customerCpf);
-    const nextSequence = await this.orderRepository.getNextSequence();
-    const order = new Order({
-      customerCpf: cpf,
-      orderSequence: nextSequence,
-    });
+    const order = await this.createOrder(customerCpf)
     await this.addOrderItems(items, order);
     if (rawCouponCode) {
       await this.applyCoupon(CouponCode.Create(rawCouponCode), order);
     }
     await this.orderRepository.save(order);
-
     return {
       orderCode: order.orderCode.value,
       total: order.total,
     };
+  }
+
+  private async createOrder(customerCpf: string): Promise<Order> {
+    const cpf = Cpf.Create(customerCpf);
+    const nextSequence = await this.orderRepository.getNextSequence();
+    return new Order({
+      customerCpf: cpf,
+      orderSequence: nextSequence,
+    });
   }
 
   private async addOrderItems(
