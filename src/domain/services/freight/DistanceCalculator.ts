@@ -5,15 +5,24 @@ export default class DistanceCalculator {
     if (from.latitude == to.latitude && from.longitude == to.longitude) {
       return 0;
     }
+    const distance = this.calculateDistanceBetweenCoordinates(from, to);
+    return this.convertToKilometers(distance);
+  }
 
-    const radlat1 = (Math.PI * from.latitude) / 180;
-    const radlat2 = (Math.PI * to.latitude) / 180;
+  private static calculateDistanceBetweenCoordinates(
+    from: Coordinate,
+    to: Coordinate
+  ): number {
+    const fromLatitudeRadius = this.calculateLatitudeRadius(from.latitude);
+    const toLatitudeRadius = this.calculateLatitudeRadius(to.latitude);
     const theta = from.longitude - to.longitude;
     const radtheta = (Math.PI * theta) / 180;
 
     let distance =
-      Math.sin(radlat1) * Math.sin(radlat2) +
-      Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      Math.sin(fromLatitudeRadius) * Math.sin(toLatitudeRadius) +
+      Math.cos(fromLatitudeRadius) *
+        Math.cos(toLatitudeRadius) *
+        Math.cos(radtheta);
 
     if (distance > 1) {
       distance = 1;
@@ -23,7 +32,11 @@ export default class DistanceCalculator {
     distance = (distance * 180) / Math.PI;
     distance = distance * 60 * 1.1515;
 
-    return DistanceCalculator.convertToKilometers(distance);
+    return distance;
+  }
+
+  private static calculateLatitudeRadius(latitude: number) {
+    return (Math.PI * latitude) / 180;
   }
 
   private static convertToKilometers(distanceInMiles: number) {
