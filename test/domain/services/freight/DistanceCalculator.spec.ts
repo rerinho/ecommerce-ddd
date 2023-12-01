@@ -8,4 +8,11 @@ describe("DistanceCalculator", () => {
 
     expect(DistanceCalculator.calculate(from, to)).toBe(748.2217780081631);
   });
+
+  test("should return 0 entered Coordinates are equal", () => {
+    const to = Coordinate.Create({ latitude: -27.5945, longitude: -48.5477 });
+    const from = Coordinate.Create({ latitude: -27.5945, longitude: -48.5477 });
+
+    expect(DistanceCalculator.calculate(from, to)).toBe(0);
+  });
 });
