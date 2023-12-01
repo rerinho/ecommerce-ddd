@@ -10,5 +10,13 @@ describe("IsInteger", () => {
         ).toThrowError(Error(IS_INTEGER_ERROR_MESSAGE("argument")));
       });
     });
+
+    describe("should not throw if the entered value is an integer number", () => {
+      it.each([[0], [-1], [10]])("%f", (input: number) => {
+        expect(() =>
+          new IsInteger({ value: input, argumentName: "argument" }).validate()
+        ).not.toThrowError();
+      });
+    });
   });
 });
