@@ -1,5 +1,7 @@
-import { HasMaxLength } from "~/common/guard-clauses/clausules";
-import { HAS_MAX_LENGTH_ERORR_MESSAGE } from "~/common/guard-clauses/clausules/HasMaxLength";
+import {
+  HAS_MAX_LENGTH_ERORR_MESSAGE,
+  HasMaxLength,
+} from "~/common/guard-clauses/clausules/HasMaxLength";
 
 describe("HasMaxLength", () => {
   describe("should throw when the entered value has length greater than the max length", () => {
