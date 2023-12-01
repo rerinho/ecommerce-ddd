@@ -1,5 +1,7 @@
-import { IsInteger } from "~/common/guard-clauses/clausules";
-import { IS_INTEGER_ERROR_MESSAGE } from "~/common/guard-clauses/clausules/IsInteger";
+import {
+  IS_INTEGER_ERROR_MESSAGE,
+  IsInteger,
+} from "~/common/guard-clauses/clausules/IsInteger";
 
 describe("IsInteger", () => {
   describe("validate", () => {
