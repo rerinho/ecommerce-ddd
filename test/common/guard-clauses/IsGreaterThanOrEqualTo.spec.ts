@@ -2,7 +2,7 @@ import { IsGreaterThanOrEqualTo } from "~/common/guard-clauses/clausules";
 
 describe("IsGreaterThanOrEqualTo", () => {
   describe("validate", () => {
-    describe("should throw when the entered value is lesser than the threshold", () => {
+    describe("should throw when the entered value is less than the threshold", () => {
       it.each([[1], [0]])("%d", (value: number) => {
         expect(() =>
           new IsGreaterThanOrEqualTo({

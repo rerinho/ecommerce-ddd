@@ -20,7 +20,7 @@ describe("HasMaxLength", () => {
       );
     });
 
-    describe("should not throw when the entered value has length lesser than the max length", () => {
+    describe("should not throw when the entered value has length less than the max length", () => {
       test.each([["aaa"], ["aa"], ["a"], [""]])("%s", (value: string) => {
         expect(() =>
           new HasMaxLength({
