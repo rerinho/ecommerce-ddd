@@ -2,15 +2,21 @@ import { VALID_CREATE_COUPON_ARGS } from "@test/utils/factories/entity-factory/C
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { DateTool } from "~/common/tools/DateTool";
 import { Coupon } from "../../../src/domain/entities/Coupon";
+import { HAS_MAX_LENGTH_ERORR_MESSAGE } from "~/common/guard-clauses/clausules/HasMaxLength";
+import { HAS_MIN_LENGTH_ERORR_MESSAGE } from "~/common/guard-clauses/clausules/HasMinLength";
 
 describe("Coupon", () => {
   describe("should not allow creating coupon when", () => {
     test.each([
-      ["smaller than expected", "COUP", "code cannot be shorter than  6."],
+      [
+        "smaller than expected",
+        "COUP",
+        HAS_MIN_LENGTH_ERORR_MESSAGE("code", 6),
+      ],
       [
         "longer than expected",
         "LONGERCOUPONCODE",
-        "code cannot be longer than  12.",
+        HAS_MAX_LENGTH_ERORR_MESSAGE("code", 12),
       ],
     ])("the code is %s", (_: string, code: string, expectedMessage: string) => {
       expect(
