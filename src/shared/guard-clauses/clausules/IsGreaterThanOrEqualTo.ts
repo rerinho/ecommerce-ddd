@@ -5,7 +5,7 @@ export const IS_GREATER_OR_EQUAL_THAN_ERROR_MESSAGE = (
   minValue: number
 ) => `${argumentName} must be equal or greater than ${minValue}.`;
 
-export class IsGreaterOrEqualThan extends GuardClause {
+export class IsGreaterThanOrEqualTo extends GuardClause {
   private minValue: number;
 
   constructor(input: CreateGuardClauseOptions & { minValue: number }) {

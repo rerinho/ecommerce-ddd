@@ -1,7 +1,7 @@
 import { StringTool } from "../../tools/StringTool";
 import { CreateGuardClauseOptions, GuardClause } from "./abstract/GuardClause";
 
-export class MinLength extends GuardClause {
+export class HasMinLength extends GuardClause {
   private length: number;
 
   constructor(input: CreateGuardClauseOptions & { minLength: number }) {

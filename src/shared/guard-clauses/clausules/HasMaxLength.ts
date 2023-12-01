@@ -1,7 +1,7 @@
 import { StringTool } from "../../tools/StringTool";
 import { CreateGuardClauseOptions, GuardClause } from "./abstract/GuardClause";
 
-export class MaxLength extends GuardClause {
+export class HasMaxLength extends GuardClause {
   private length: number;
 
   constructor(input: CreateGuardClauseOptions & { maxLength: number }) {

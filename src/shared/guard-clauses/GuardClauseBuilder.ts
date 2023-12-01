@@ -1,12 +1,12 @@
 import {
-  MaxLength,
   IsInteger,
   IsPositive,
   IsValidCpf,
-  MinLength,
-  IsGreaterOrEqualThan,
-  IsLessOrEqualThan,
   IsValidUuid,
+  HasMinLength,
+  HasMaxLength,
+  IsGreaterThanOrEqualTo,
+  IsLessThanOrEqualTo,
 } from "./clausules";
 
 export class Guard {
@@ -17,7 +17,7 @@ export class Guard {
   }
 
   hasMaxLength(length: number) {
-    new MaxLength({
+    new HasMaxLength({
       value: this.value,
       argumentName: this.argumentName,
       maxLength: length,
@@ -26,7 +26,7 @@ export class Guard {
   }
 
   hasMinLength(length: number) {
-    new MinLength({
+    new HasMinLength({
       value: this.value,
       argumentName: this.argumentName,
       minLength: length,
@@ -67,7 +67,7 @@ export class Guard {
   }
 
   isGreaterThanOrEqualTo(value: number) {
-    new IsGreaterOrEqualThan({
+    new IsGreaterThanOrEqualTo({
       value: this.value,
       argumentName: this.argumentName,
       minValue: value,
@@ -76,7 +76,7 @@ export class Guard {
   }
 
   isLessThanOrEqualTo(value: number) {
-    new IsLessOrEqualThan({
+    new IsLessThanOrEqualTo({
       value: this.value,
       argumentName: this.argumentName,
       maxValue: value,
