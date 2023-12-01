@@ -1,4 +1,3 @@
-import { StringTool } from "../../tools/StringTool";
 import { CreateGuardClauseOptions, GuardClause } from "./abstract/GuardClause";
 
 export class HasMaxLength extends GuardClause {
@@ -14,9 +13,6 @@ export class HasMaxLength extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return (
-      typeof this.value === "string" &&
-      StringTool.hasLengthSmallOrEqualTo(this.value, this.length)
-    );
+    return typeof this.value === "string" && this.value.length <= this.length;
   }
 }

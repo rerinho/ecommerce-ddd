@@ -1,4 +1,3 @@
-import { NumberTool } from "../../tools/NumberTool";
 import { GuardClause } from "./abstract/GuardClause";
 
 export const IS_POSITIVE_ERROR_MESSAGE = (argumentName: string) =>
@@ -10,6 +9,6 @@ export class IsPositive extends GuardClause {
   }
 
   wasSatisfied(): boolean {
-    return typeof this.value === "number" && NumberTool.isPositive(this.value);
+    return typeof this.value === "number" && this.value > 0;
   }
 }
