@@ -12,4 +12,16 @@ describe("IsGreaterThanOrEqualTo", () => {
       ).toThrowError(Error);
     });
   });
+
+  describe("should not throw when the entered value is greater than or equal to the threshold", () => {
+    it.each([[2], [3]])("%d", (value: number) => {
+      expect(() =>
+        new IsGreaterThanOrEqualTo({
+          value,
+          argumentName: "argument",
+          minValue: 2,
+        }).validate()
+      ).not.toThrowError();
+    });
+  });
 });
