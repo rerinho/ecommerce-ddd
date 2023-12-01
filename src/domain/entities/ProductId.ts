@@ -1,6 +1,6 @@
-import { ValueObject } from "~/shared/domain/ValueObject";
-import { Guard } from "~/shared/guard-clauses/GuardClauseBuilder";
-import { UuidTool } from "~/shared/tools/UuidTool";
+import { ValueObject } from "~/common/domain/ValueObject";
+import { Guard } from "~/common/guard-clauses/GuardClauseBuilder";
+import { UuidTool } from "~/common/tools/UuidTool";
 
 interface ProductIdProps {
   value: string;

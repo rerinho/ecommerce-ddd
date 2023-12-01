@@ -1,4 +1,4 @@
-import { ValueObject } from "~/shared/domain/ValueObject";
+import { ValueObject } from "~/common/domain/ValueObject";
 
 class MockValueObject extends ValueObject<{ value?: string }> {
   static Create(value: string) {

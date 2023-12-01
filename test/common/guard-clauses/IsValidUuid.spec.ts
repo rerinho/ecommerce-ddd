@@ -2,7 +2,7 @@ import _ = require("lodash");
 import {
   IsValidUuid,
   INVALID_UUID_MESSAGE,
-} from "~/shared/guard-clauses/clausules/IsValidUuid";
+} from "~/common/guard-clauses/clausules/IsValidUuid";
 
 describe("IsValidUuid", () => {
   describe("should throw error, when the entered value", () => {

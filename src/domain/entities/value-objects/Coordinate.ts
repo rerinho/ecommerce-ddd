@@ -1,5 +1,5 @@
-import { ValueObject } from "~/shared/domain/ValueObject";
-import { Guard } from "~/shared/guard-clauses/GuardClauseBuilder";
+import { ValueObject } from "~/common/domain/ValueObject";
+import { Guard } from "~/common/guard-clauses/GuardClauseBuilder";
 
 export interface CoordinateProps {
   latitude: number;

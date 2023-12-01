@@ -1,7 +1,7 @@
 import { VALID_CREATE_COORDINATE_ARGS } from "@test/utils/factories/value-object-factory/Coordinate";
 import { Coordinate } from "~/domain/entities/value-objects/Coordinate";
-import { IS_GREATER_OR_EQUAL_THAN_ERROR_MESSAGE } from "~/shared/guard-clauses/clausules/IsGreaterThanOrEqualTo";
-import { IS_LESS_OR_EQUAL_THAN_ERROR_MESSAGE } from "~/shared/guard-clauses/clausules/IsLessThanEqualTo";
+import { IS_GREATER_OR_EQUAL_THAN_ERROR_MESSAGE } from "~/common/guard-clauses/clausules/IsGreaterThanOrEqualTo";
+import { IS_LESS_OR_EQUAL_THAN_ERROR_MESSAGE } from "~/common/guard-clauses/clausules/IsLessThanEqualTo";
 
 describe("Coordinate", () => {
   describe("should not allow creating a Coordinate ", () => {

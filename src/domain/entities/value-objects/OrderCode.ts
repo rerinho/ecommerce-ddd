@@ -1,4 +1,4 @@
-import { ValueObject } from "~/shared/domain/ValueObject";
+import { ValueObject } from "~/common/domain/ValueObject";
 import { Sequence } from "./Sequence";
 
 interface OrderCodeProps {

@@ -1,4 +1,4 @@
-import { DateTool } from "~/shared/tools/DateTool";
+import { DateTool } from "~/common/tools/DateTool";
 
 describe("DateTools", () => {
   describe("addDaysTo", () => {

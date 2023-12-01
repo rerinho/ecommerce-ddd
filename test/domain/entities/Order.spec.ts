@@ -15,7 +15,7 @@ import {
 import { Price } from "~/domain/entities/value-objects/Price";
 import { Quantity } from "~/domain/entities/value-objects/Quantity";
 import { Sequence } from "~/domain/entities/value-objects/Sequence";
-import { DateTool } from "~/shared/tools/DateTool";
+import { DateTool } from "~/common/tools/DateTool";
 
 // Constants
 const INVALID_RAW_CPF = "111111111";

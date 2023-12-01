@@ -13,8 +13,8 @@ import { ProductRepository } from "~/domain/repositories/ProductRepository";
 import { CouponInMemoryRepository } from "~/infra/repositories/in-memory/CouponInMemoryRepository";
 import { OrderInMemoryRepository } from "~/infra/repositories/in-memory/OrderInMemoryRepository";
 import { ProductInMemoryRepository } from "~/infra/repositories/in-memory/ProductInMemoryRepository";
-import { DateTool } from "~/shared/tools/DateTool";
-import { UuidTool } from "~/shared/tools/UuidTool";
+import { DateTool } from "~/common/tools/DateTool";
+import { UuidTool } from "~/common/tools/UuidTool";
 
 // Constants
 const cpf: Cpf = makeCpf();

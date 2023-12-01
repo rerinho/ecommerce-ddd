@@ -1,4 +1,4 @@
-import { UuidTool } from "~/shared/tools/UuidTool";
+import { UuidTool } from "~/common/tools/UuidTool";
 import { GuardClause } from "./abstract/GuardClause";
 
 export const INVALID_UUID_MESSAGE = (argumentName: string) =>

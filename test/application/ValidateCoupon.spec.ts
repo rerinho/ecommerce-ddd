@@ -3,7 +3,7 @@ import { ValidateCoupon } from "~/application/use-cases/ValidateCoupon";
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { CouponRepository } from "~/domain/repositories/CouponRepository";
 import { CouponInMemoryRepository } from "~/infra/repositories/in-memory/CouponInMemoryRepository";
-import { DateTool } from "~/shared/tools/DateTool";
+import { DateTool } from "~/common/tools/DateTool";
 
 // Constants
 const validCoupon = makeCoupon({

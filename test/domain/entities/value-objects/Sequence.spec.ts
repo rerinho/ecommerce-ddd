@@ -1,6 +1,6 @@
 import { Sequence } from "~/domain/entities/value-objects/Sequence";
-import { IS_INTEGER_ERROR_MESSAGE } from "~/shared/guard-clauses/clausules/IsInteger";
-import { IS_POSITIVE_ERROR_MESSAGE } from "~/shared/guard-clauses/clausules/IsPositive";
+import { IS_INTEGER_ERROR_MESSAGE } from "~/common/guard-clauses/clausules/IsInteger";
+import { IS_POSITIVE_ERROR_MESSAGE } from "~/common/guard-clauses/clausules/IsPositive";
 
 describe("Sequence", () => {
   describe("should throw an error", () => {

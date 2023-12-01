@@ -4,7 +4,7 @@ import {
   Discount,
   DiscountType,
 } from "~/domain/entities/value-objects/Discount";
-import { DateTool } from "~/shared/tools/DateTool";
+import { DateTool } from "~/common/tools/DateTool";
 
 export const VALID_CREATE_COUPON_ARGS: CreateCouponArgs = {
   code: CouponCode.Create("VALIDCODE123"),
