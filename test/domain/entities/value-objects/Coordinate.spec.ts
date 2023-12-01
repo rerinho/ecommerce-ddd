@@ -64,7 +64,7 @@ describe("Coordinate", () => {
     });
   });
 
-  test("should create a Coordinate instance when a valid latitude and longitude  values are entered", () => {
+  test("should create a Coordinate instance when a valid latitude and longitude values are entered", () => {
     const coordinate = Coordinate.Create(VALID_CREATE_COORDINATE_ARGS);
 
     expect(coordinate).toBeTruthy();
