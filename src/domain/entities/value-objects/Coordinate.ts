@@ -13,15 +13,12 @@ export interface CreateCoordinateArgs {
 
 export class Coordinate extends ValueObject<CoordinateProps> {
   static Create({ latitude, longitude }: CreateCoordinateArgs) {
-    Guard.Create({ value: latitude, argumentName: "latitude" })
-      .greaterOrEqualThan(-90)
-      .lessOrEqualThan(90)
-      .validate();
-
-    Guard.Create({ value: longitude, argumentName: "longitude" })
-      .greaterOrEqualThan(-180)
-      .lessOrEqualThan(180)
-      .validate();
+    Guard.Argument(latitude, "latitude")
+      .isGreaterThanOrEqualTo(-90)
+      .isLessThanOrEqualTo(90);
+    Guard.Argument(longitude, "longitude")
+      .isGreaterThanOrEqualTo(-180)
+      .isLessThanOrEqualTo(180);
 
     return new Coordinate({ latitude, longitude });
   }

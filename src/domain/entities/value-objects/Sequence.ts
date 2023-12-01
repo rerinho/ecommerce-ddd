@@ -7,10 +7,7 @@ interface SequenceProps {
 
 export class Sequence extends ValueObject<SequenceProps> {
   static Create(sequence: number) {
-    Guard.Create({ value: sequence, argumentName: "sequence" })
-      .isInteger()
-      .isPositive()
-      .validate();
+    Guard.Argument(sequence, "sequence").isInteger().isPositive();
 
     return new Sequence({ value: sequence });
   }

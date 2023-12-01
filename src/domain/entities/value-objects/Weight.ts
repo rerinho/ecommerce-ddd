@@ -12,9 +12,7 @@ export enum WeightMeasures {
 
 export class Weight extends ValueObject<WeightProps> {
   static Create(weight: number) {
-    Guard.Create({ value: weight, argumentName: "weight" })
-      .isPositive()
-      .validate();
+    Guard.Argument(weight, "weight").isPositive();
 
     return new Weight({
       value: weight,

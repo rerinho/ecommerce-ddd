@@ -7,7 +7,7 @@ interface CpfProps {
 
 export class Cpf extends ValueObject<CpfProps> {
   static Create(cpf: string) {
-    Guard.Create({ value: cpf, argumentName: "cpf" }).isValidCpf().validate();
+    Guard.Argument(cpf, "cpf").isValidCpf();
 
     return new Cpf({ value: Cpf.removeNonNumericalCharacters(cpf) });
   }

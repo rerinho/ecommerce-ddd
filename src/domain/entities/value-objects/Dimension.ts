@@ -19,15 +19,9 @@ export class Dimension extends ValueObject<DimensionProps> {
     lengthInMeters,
     widthInMeters,
   }: CreateDimensionArgs) {
-    Guard.Create({ argumentName: "heightInMeters", value: heightInMeters })
-      .isPositive()
-      .validate();
-    Guard.Create({ argumentName: "widthInMeters", value: widthInMeters })
-      .isPositive()
-      .validate();
-    Guard.Create({ argumentName: "lengthInMeters", value: lengthInMeters })
-      .isPositive()
-      .validate();
+    Guard.Argument(heightInMeters, "heightInMeters").isPositive();
+    Guard.Argument(widthInMeters, "widthInMeters").isPositive();
+    Guard.Argument(lengthInMeters, "lengthInMeters").isPositive();
 
     return new Dimension({
       heightInMeters,

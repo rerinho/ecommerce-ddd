@@ -7,9 +7,7 @@ interface PriceProps {
 
 export class Price extends ValueObject<PriceProps> {
   static Create(price: number) {
-    Guard.Create({ value: price, argumentName: "price" })
-      .isPositive()
-      .validate();
+    Guard.Argument(price, "price").isPositive();
 
     return new Price({ value: price });
   }

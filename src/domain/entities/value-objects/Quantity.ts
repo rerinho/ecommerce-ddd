@@ -7,10 +7,7 @@ interface QuantityProps {
 
 export class Quantity extends ValueObject<QuantityProps> {
   static Create(quantity: number) {
-    Guard.Create({ value: quantity, argumentName: "quantity" })
-      .isInteger()
-      .isPositive()
-      .validate();
+    Guard.Argument(quantity, "quantity").isInteger().isPositive();
 
     return new Quantity({ value: quantity });
   }

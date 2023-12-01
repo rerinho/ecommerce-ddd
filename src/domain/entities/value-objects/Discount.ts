@@ -18,9 +18,7 @@ export interface CreateDiscountOptions {
 
 export class Discount extends ValueObject<DiscountProps> {
   static Create({ type, value }: CreateDiscountOptions) {
-    Guard.Create({ value: value, argumentName: "value" })
-      .isPositive()
-      .validate();
+    Guard.Argument(value, "value").isPositive();
 
     return new Discount({ value, type });
   }

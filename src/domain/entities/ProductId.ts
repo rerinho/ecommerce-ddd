@@ -9,9 +9,7 @@ interface ProductIdProps {
 export class ProductId extends ValueObject<ProductIdProps> {
   static Create(id?: string) {
     if (id) {
-      Guard.Create({ argumentName: "productId", value: id })
-        .isValidUuid()
-        .validate();
+      Guard.Argument(id, "productId").isValidUuid();
     }
 
     return new ProductId({ value: id || UuidTool.generate() });
