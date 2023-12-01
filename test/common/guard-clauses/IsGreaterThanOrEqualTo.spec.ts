@@ -1,4 +1,7 @@
-import { IsGreaterThanOrEqualTo } from "~/common/guard-clauses/clausules";
+import {
+  IS_GREATER_OR_EQUAL_THAN_ERROR_MESSAGE,
+  IsGreaterThanOrEqualTo,
+} from "~/common/guard-clauses/clausules/IsGreaterThanOrEqualTo";
 
 describe("IsGreaterThanOrEqualTo", () => {
   describe("validate", () => {
@@ -10,7 +13,9 @@ describe("IsGreaterThanOrEqualTo", () => {
             argumentName: "argument",
             minValue: 2,
           }).validate()
-        ).toThrowError(Error);
+        ).toThrowError(
+          Error(IS_GREATER_OR_EQUAL_THAN_ERROR_MESSAGE("argument", 2))
+        );
       });
     });
 
