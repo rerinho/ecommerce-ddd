@@ -8,12 +8,12 @@ describe("Coordinate", () => {
     describe("when the latitude is invalid", () => {
       test.each([
         [
-          "less than te minimum",
+          "less than the minimum",
           -90.01,
           IS_GREATER_OR_EQUAL_THAN_ERROR_MESSAGE("latitude", -90),
         ],
         [
-          "greater than te maximum",
+          "greater than the maximum",
           90.01,
           IS_LESS_OR_EQUAL_THAN_ERROR_MESSAGE("latitude", 90),
         ],
