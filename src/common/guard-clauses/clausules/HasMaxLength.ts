@@ -1,5 +1,10 @@
 import { CreateGuardClauseOptions, GuardClause } from "./abstract/GuardClause";
 
+export const HAS_MAX_LENGTH_ERORR_MESSAGE = (
+  argumentName: string,
+  length: number
+) => `${argumentName} cannot be longer than ${length}.`;
+
 export class HasMaxLength extends GuardClause {
   private length: number;
 
@@ -9,7 +14,7 @@ export class HasMaxLength extends GuardClause {
   }
 
   getGuardExceptionMessage(): string {
-    return `${this.argumentName} cannot be longer than  ${this.length}.`;
+    return HAS_MAX_LENGTH_ERORR_MESSAGE(this.argumentName, this.length);
   }
 
   wasSatisfied(): boolean {
