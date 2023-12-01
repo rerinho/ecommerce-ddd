@@ -1,6 +1,6 @@
 import { ValueObject } from "~/common/domain/ValueObject";
 import { Guard } from "~/common/guard-clauses/GuardClauseBuilder";
-import { UuidTool } from "~/common/tools/UuidTool";
+import { randomUUID } from "crypto";
 
 interface ProductIdProps {
   value: string;
@@ -12,7 +12,7 @@ export class ProductId extends ValueObject<ProductIdProps> {
       Guard.Argument(id, "productId").isValidUuid();
     }
 
-    return new ProductId({ value: id || UuidTool.generate() });
+    return new ProductId({ value: id || randomUUID() });
   }
 
   get value(): string {
