@@ -1,5 +1,5 @@
 import Product from "~/domain/entities/Product";
-import { ProductId } from "~/domain/entities/ProductId";
+import { ProductId } from "~/domain/entities/value-objects/ProductId";
 import { Dimension } from "~/domain/entities/value-objects/Dimension";
 import { Price } from "~/domain/entities/value-objects/Price";
 import { ProductDescription } from "~/domain/entities/value-objects/ProductDescription";

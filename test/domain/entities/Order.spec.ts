@@ -5,7 +5,7 @@ import {
 } from "@test/utils/factories/entity-factory/OrderFactory";
 import { makeOrderItem } from "@test/utils/factories/entity-factory/OrderItemFactory";
 import { Order } from "~/domain/entities/Order";
-import { OrderId } from "~/domain/entities/OrderId";
+import { OrderId } from "~/domain/entities/value-objects/OrderId";
 import { Cpf, INVALID_CPF_MESSAGE } from "~/domain/entities/value-objects/Cpf";
 import { Discount } from "~/domain/entities/value-objects/Discount";
 import { Price } from "~/domain/entities/value-objects/Price";

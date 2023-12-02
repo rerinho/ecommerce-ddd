@@ -1,6 +1,6 @@
 import { VALID_CREATE_PRODUCT_ARGS } from "@test/utils/factories/entity-factory/ProductFactory";
 import Product from "~/domain/entities/Product";
-import { ProductId } from "~/domain/entities/ProductId";
+import { ProductId } from "~/domain/entities/value-objects/ProductId";
 import {
   CreateDimensionArgs,
   Dimension,

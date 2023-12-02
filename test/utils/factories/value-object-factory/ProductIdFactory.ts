@@ -1,4 +1,4 @@
-import { ProductId } from "~/domain/entities/ProductId";
+import { ProductId } from "~/domain/entities/value-objects/ProductId";
 import { randomUUID } from "crypto";
 
 export function makeProductId(id?: string) {

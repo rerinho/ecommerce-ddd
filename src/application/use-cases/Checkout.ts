@@ -1,6 +1,6 @@
 import { Order } from "~/domain/entities/Order";
 import { OrderItem } from "~/domain/entities/OrderItem";
-import { ProductId } from "~/domain/entities/ProductId";
+import { ProductId } from "~/domain/entities/value-objects/ProductId";
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { Cpf } from "~/domain/entities/value-objects/Cpf";
 import { Quantity } from "~/domain/entities/value-objects/Quantity";
@@ -36,7 +36,7 @@ export class Checkout {
     items,
     couponCode: rawCouponCode,
   }: CheckoutInput): Promise<CheckoutOutput> {
-    const order = await this.createOrder(customerCpf)
+    const order = await this.createOrder(customerCpf);
     await this.addOrderItems(items, order);
     if (rawCouponCode) {
       await this.applyCoupon(CouponCode.Create(rawCouponCode), order);

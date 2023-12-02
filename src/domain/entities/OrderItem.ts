@@ -1,4 +1,4 @@
-import { ProductId } from "./ProductId";
+import { ProductId } from "./value-objects/ProductId";
 import { Price } from "./value-objects/Price";
 import { Quantity } from "./value-objects/Quantity";
 

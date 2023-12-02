@@ -1,6 +1,6 @@
 import { PercentageDiscountCalculator } from "../services/discount/PercentageDiscountCalculator";
 import { Coupon } from "./Coupon";
-import { OrderId } from "./OrderId";
+import { OrderId } from "./value-objects/OrderId";
 import { OrderItem as OrderItem } from "./OrderItem";
 import { Cpf } from "./value-objects/Cpf";
 import { OrderCode } from "./value-objects/OrderCode";
@@ -20,7 +20,7 @@ export class Order {
   private _orderCode: OrderCode;
 
   constructor(args: CreateOrderArgs) {
-    this._id = args.id || OrderId.Create();
+    this._id = args.id ?? OrderId.Create();
     this._customerCpf = args.customerCpf;
     this._orderCode = OrderCode.Create(args.orderSequence);
   }

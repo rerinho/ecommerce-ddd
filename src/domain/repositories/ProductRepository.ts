@@ -1,5 +1,5 @@
 import Product from "../entities/Product";
-import { ProductId } from "../entities/ProductId";
+import { ProductId } from "../entities/value-objects/ProductId";
 
 export interface ListProductOptions {
   productIds?: ProductId[];
