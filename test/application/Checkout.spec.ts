@@ -4,10 +4,7 @@ import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
 import { Checkout, CheckoutInput } from "~/application/use-cases/Checkout";
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 import { Cpf } from "~/domain/entities/value-objects/Cpf";
-import {
-  Discount,
-  DiscountType,
-} from "~/domain/entities/value-objects/Discount";
+import { Discount } from "~/domain/entities/value-objects/Discount";
 import { Price } from "~/domain/entities/value-objects/Price";
 import { ProductRepository } from "~/domain/repositories/ProductRepository";
 import { CouponInMemoryRepository } from "~/infra/repositories/in-memory/CouponInMemoryRepository";
@@ -94,10 +91,7 @@ describe("Checkout", () => {
     describe("when a valid coupon code is entered", () => {
       test("should apply the coupon discount", async () => {
         const coupon = makeCoupon({
-          discount: Discount.Create({
-            type: DiscountType.Nominal,
-            value: 50,
-          }),
+          discount: Discount.Create(0.1),
           code: CouponCode.Create("GET30OFF"),
         });
         await couponRepository.save(coupon);
@@ -120,7 +114,7 @@ describe("Checkout", () => {
 
         expect(output).toEqual(
           expect.objectContaining({
-            total: 300,
+            total: 315,
           })
         );
       });

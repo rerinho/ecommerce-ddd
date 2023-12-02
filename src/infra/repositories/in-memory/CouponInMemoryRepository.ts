@@ -1,15 +1,11 @@
 import { Coupon } from "~/domain/entities/Coupon";
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
-import {
-  Discount,
-  DiscountType,
-} from "~/domain/entities/value-objects/Discount";
+import { Discount } from "~/domain/entities/value-objects/Discount";
 import { CouponRepository } from "~/domain/repositories/CouponRepository";
 import { coupons as persistedCoupons } from "~/infra/database/database.json";
 
 interface DatabaseCoupon {
   code: string;
-  discount_type: string;
   discount_value: number;
   expires_at: string;
 }
@@ -44,10 +40,7 @@ export class CouponInMemoryRepository implements CouponRepository {
   private toDomain(databaseCoupon: DatabaseCoupon) {
     return new Coupon({
       code: CouponCode.Create(databaseCoupon.code),
-      discount: Discount.Create({
-        type: databaseCoupon.discount_type as DiscountType,
-        value: databaseCoupon.discount_value,
-      }),
+      discount: Discount.Create(databaseCoupon.discount_value),
       expirationDate: new Date(databaseCoupon.expires_at),
     });
   }

@@ -4,14 +4,10 @@ import {
   makeOrder,
 } from "@test/utils/factories/entity-factory/OrderFactory";
 import { makeOrderItem } from "@test/utils/factories/entity-factory/OrderItemFactory";
-import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
 import { Order } from "~/domain/entities/Order";
 import { OrderId } from "~/domain/entities/OrderId";
 import { Cpf, INVALID_CPF_MESSAGE } from "~/domain/entities/value-objects/Cpf";
-import {
-  Discount,
-  DiscountType,
-} from "~/domain/entities/value-objects/Discount";
+import { Discount } from "~/domain/entities/value-objects/Discount";
 import { Price } from "~/domain/entities/value-objects/Price";
 import { Quantity } from "~/domain/entities/value-objects/Quantity";
 import { Sequence } from "~/domain/entities/value-objects/Sequence";
@@ -109,7 +105,7 @@ describe("Order", () => {
       );
     });
 
-    test("nominal discount ", () => {
+    test("10% off discount", () => {
       const order = makeOrder();
       const orderItem = makeOrderItem({
         price: Price.Create(50),
@@ -118,30 +114,7 @@ describe("Order", () => {
       order.addItem(orderItem);
 
       const coupon = makeCoupon({
-        discount: Discount.Create({
-          type: DiscountType.Nominal,
-          value: 50,
-        }),
-      });
-
-      order.applyCoupon(coupon);
-
-      expect(order.total).toBe(100);
-    });
-
-    test("percentage discount ", () => {
-      const order = makeOrder();
-      const orderItem = makeOrderItem({
-        price: Price.Create(50),
-        quantity: Quantity.Create(3),
-      });
-      order.addItem(orderItem);
-
-      const coupon = makeCoupon({
-        discount: Discount.Create({
-          type: DiscountType.Percentage,
-          value: 0.1,
-        }),
+        discount: Discount.Create(0.1),
       });
 
       order.applyCoupon(coupon);
@@ -159,10 +132,7 @@ describe("Order", () => {
       order.addItem(orderItem);
 
       const coupon = makeCoupon({
-        discount: Discount.Create({
-          type: DiscountType.Nominal,
-          value: 50,
-        }),
+        discount: Discount.Create(0.5),
       });
 
       order.applyCoupon(coupon);

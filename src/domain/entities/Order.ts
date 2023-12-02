@@ -1,4 +1,4 @@
-import { DiscountCalculatorFactory } from "../services/discount/DiscountCalculatorFactory";
+import { PercentageDiscountCalculator } from "../services/discount/PercentageDiscountCalculator";
 import { Coupon } from "./Coupon";
 import { OrderId } from "./OrderId";
 import { OrderItem as OrderItem } from "./OrderItem";
@@ -57,11 +57,10 @@ export class Order {
       return 0;
     }
 
-    const discountCalculator = DiscountCalculatorFactory.Create(
+    return new PercentageDiscountCalculator().calculate(
+      this.subTotal,
       this.coupon.discount
     );
-
-    return discountCalculator.calculate(this.subTotal, this.coupon.discount);
   }
 
   public addItem(orderItem: OrderItem) {

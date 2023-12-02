@@ -31,7 +31,6 @@
   "coupons": [
     {
       "code": "GET15OFF",
-      "discount_type": "PERCENTAGE",
       "discount_value": 0.15,
       "expires_at": "2030-12-17T19:05:38.998Z"
     }
