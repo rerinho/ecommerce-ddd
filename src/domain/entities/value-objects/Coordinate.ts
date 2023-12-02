@@ -23,10 +23,6 @@ export class Coordinate extends ValueObject<CoordinateProps> {
     return new Coordinate({ latitude, longitude });
   }
 
-  get value(): CoordinateProps {
-    return this.props;
-  }
-
   get latitude(): number {
     return this.props.latitude;
   }
