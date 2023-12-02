@@ -1,5 +1,4 @@
 import { Discount } from "~/domain/entities/value-objects/Discount";
-import { DiscountCalculator } from "~/domain/services/discount/DiscountCalculator";
 import { PercentageDiscountCalculator } from "~/domain/services/discount/PercentageDiscountCalculator";
 
 const makePercentageDiscountCalculator = () => {
