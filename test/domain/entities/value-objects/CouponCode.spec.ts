@@ -3,14 +3,14 @@ import { HAS_MIN_LENGTH_ERORR_MESSAGE } from "~/common/guard-clauses/clausules/H
 import { CouponCode } from "~/domain/entities/value-objects/CouponCode";
 
 describe("CouponCode", () => {
-  describe("should throw when", () => {
-    it("coupon code is smaller than expected", () => {
+  describe("should throw when coupon code is", () => {
+    it("smaller than expected", () => {
       expect(() => CouponCode.Create("COUP")).toThrow(
         Error(HAS_MIN_LENGTH_ERORR_MESSAGE("code", 6))
       );
     });
 
-    it("coupon code is longer than expected", () => {
+    it("is longer than expected", () => {
       expect(() => CouponCode.Create("LONGERCOUPONCODE")).toThrow(
         Error(HAS_MAX_LENGTH_ERORR_MESSAGE("code", 12))
       );
