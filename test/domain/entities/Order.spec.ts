@@ -7,7 +7,7 @@ import { makeOrderItem } from "@test/utils/factories/entity-factory/OrderItemFac
 import { makeCpf } from "@test/utils/factories/value-object-factory/CpfFactory";
 import { Order } from "~/domain/entities/Order";
 import { OrderId } from "~/domain/entities/OrderId";
-import { Cpf } from "~/domain/entities/value-objects/Cpf";
+import { Cpf, INVALID_CPF_MESSAGE } from "~/domain/entities/value-objects/Cpf";
 import {
   Discount,
   DiscountType,
@@ -38,7 +38,7 @@ describe("Order", () => {
               ...VALID_CREATE_ORDER_ARGS,
               customerCpf: Cpf.Create(INVALID_RAW_CPF),
             })
-        ).toThrow(Error);
+        ).toThrow(Error(INVALID_CPF_MESSAGE));
       });
 
       test("with an invalid orderSequence", () => {

@@ -1,6 +1,5 @@
 export { IsInteger } from "./IsInteger";
 export { IsPositive } from "./IsPositive";
-export { IsValidCpf } from "./IsValidCpf";
 export { HasMaxLength } from "./HasMaxLength";
 export { HasMinLength } from "./HasMinLength";
 export { IsGreaterThanOrEqualTo } from "./IsGreaterThanOrEqualTo";

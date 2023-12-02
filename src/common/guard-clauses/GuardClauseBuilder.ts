@@ -1,7 +1,6 @@
 import {
   IsInteger,
   IsPositive,
-  IsValidCpf,
   IsValidUuid,
   HasMinLength,
   HasMaxLength,
@@ -36,14 +35,6 @@ export class Guard {
 
   isPositive() {
     new IsPositive({
-      value: this.value,
-      argumentName: this.argumentName,
-    }).validate();
-    return this;
-  }
-
-  isValidCpf() {
-    new IsValidCpf({
       value: this.value,
       argumentName: this.argumentName,
     }).validate();

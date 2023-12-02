@@ -1,4 +1,7 @@
-import { Cpf } from "../../../../src/domain/entities/value-objects/Cpf";
+import {
+  Cpf,
+  INVALID_CPF_MESSAGE,
+} from "../../../../src/domain/entities/value-objects/Cpf";
 
 // Constants
 
@@ -31,12 +34,10 @@ const VALID_CPFS = [
   "24348005052",
 ];
 
-const EXPECTED_FAIL_MESSAGE = "cpf its not a valid CPF.";
-
 describe("Cpf", () => {
   describe("should throw error when the entered CPF is invalid", () => {
     test.each(INVALID_CPFS)("%s", (rawCpf: string) => {
-      expect(() => Cpf.Create(rawCpf)).toThrow(Error(EXPECTED_FAIL_MESSAGE));
+      expect(() => Cpf.Create(rawCpf)).toThrow(Error(INVALID_CPF_MESSAGE));
     });
   });
 
